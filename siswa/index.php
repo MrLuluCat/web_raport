@@ -47,7 +47,20 @@ $conn->close();
 
 <body>
     <div class="container">
-
+        <?php if (isset($success_message)) : ?>
+            <div id="toast-container" class="toast-top-right">
+                <div class="toast toast-success" aria-live="assertive" style="display: block;">
+                    <div class="toast-title">Success</div>
+                    <div class="toast-message"><?php echo $success_message; ?></div>
+                </div>
+            </div>
+            <script>
+                // Menghilangkan pesan toastr setelah 5 detik
+                setTimeout(function() {
+                    $('#toast-container').fadeOut();
+                }, 5000);
+            </script>
+        <?php endif; ?>
         <div class="row">
             <div class="col-md-6 offset-md-3 mt-5">
                 <h2>Dashboard Siswa</h2>

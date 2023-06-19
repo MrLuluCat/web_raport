@@ -39,7 +39,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
   if (validasiLogin($username, $password)) {
     $_SESSION['siswa_username'] = $username;
+    $success_message = "Login berhasil";
     header("Location: index.php");
+    
     exit();
   } else {
     $error_message = "Username atau password salah";
@@ -66,11 +68,32 @@ $conn->close();
   <link rel="stylesheet" href="../assets/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/css/adminlte.min.css">
+  <!-- Toastr -->
+  <link rel="stylesheet" href="../assets/plugins/toastr/toastr.min.css">
+
   <script src="https://kit.fontawesome.com/ec930b21b5.js" crossorigin="anonymous"></script>
-  <!-- <link rel="stylesheet" href="../assets/dist/css/adminlte.min.css"> -->
+
+  <link rel="stylesheet" href="../assets/dist/css/adminlte.min.css">
 </head>
 
 <body class="hold-transition login-page">
+  
+  <?php if (isset($error_message)) : ?>
+    <div id="toast-container" class="toast-top-right">
+      <div class="toast toast-error" aria-live="assertive" style="display: block;">
+        <div class="toast-title">Error</div>
+        <div class="toast-message"><?php echo $error_message; ?></div>
+      </div>
+    </div>
+    <script>
+      // Menghilangkan pesan toastr setelah 5 detik
+      setTimeout(function() {
+        $('#toast-container').fadeOut();
+      }, 2000);
+    </script>
+  <?php endif; ?>
+  
+
   <div class="login-box">
     <!-- /.login-logo -->
     <div class="card card-outline card-primary">
@@ -147,8 +170,13 @@ $conn->close();
   <script src="../assets/plugins/jquery/jquery.min.js"></script>
   <!-- Bootstrap 4 -->
   <script src="../assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <!-- SweetAlert2 -->
+  <script src="../assets/plugins/sweetalert2/sweetalert2.min.js"></script>
+  <!-- Toastr -->
+  <script src="../assets/plugins/toastr/toastr.min.js"></script>
   <!-- AdminLTE App -->
   <script src="../assets/dist/js/adminlte.min.js"></script>
+  <!-- Page specific script -->
 
 </body>
 

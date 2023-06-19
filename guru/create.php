@@ -3,7 +3,7 @@
 require_once('../koneksi.php');
 
 // Fungsi untuk menambahkan guru dan generate pengguna
-function tambahguru($NIP, $nama_guru, $jenis_kelamin, $tanggal_lahir, $alamat, $nomor_telepon, $email)
+function createGuru($NIP, $nama_guru, $jenis_kelamin, $tanggal_lahir, $alamat, $nomor_telepon, $email)
 {
     // Kode tambahan untuk validasi data guru jika diperlukan
 
@@ -46,7 +46,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $nomor_telepon = $_POST["nomor_telepon"];
     $email = $_POST["email"];
 
-    tambahguru($NIP, $nama_guru, $jenis_kelamin, $tanggal_lahir, $alamat, $nomor_telepon, $email);
+    createGuru($NIP, $nama_guru, $jenis_kelamin, $tanggal_lahir, $alamat, $nomor_telepon, $email);
 
     // Redirect ke halaman baru setelah form diproses
     header("Location: success.php");

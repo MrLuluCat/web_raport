@@ -87,7 +87,9 @@ $conn->close();
                 </table>
                 <a href="edit.php?id_guru=<?php echo $row['id_guru']; ?>" class="btn btn-primary">Edit</a>
                 <a href="delete.php?id_guru=<?php echo $row['id_guru']; ?>" class="btn btn-danger">Delete</a>
-                <a href="logout.php" class="btn btn-secondary">Logout</a>
+                <form method="POST" action="logout.php">
+                    <button class="d-inline btn btn-secondary" name="logout">Logout</button>
+                </form>
             </div>
         </div>
     </div>

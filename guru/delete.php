@@ -23,7 +23,7 @@ if ($result && mysqli_num_rows($result) == 1) {
 }
 
 // Fungsi untuk menghapus guru dan pengguna dari database
-function deleteguru($conn, $id_guru)
+function deleteGuru($conn, $id_guru)
 {
     // Mendapatkan NIP guru
     $query = "SELECT NIP FROM guru WHERE id_guru = '$id_guru'";
@@ -66,7 +66,7 @@ if (isset($_POST['delete'])) {
     $id_guru = $_POST['id_guru'];
 
     // Panggil fungsi deleteguru untuk menghapus guru dan pengguna dari database
-    $delete = deleteguru($conn, $id_guru);
+    $delete = deleteGuru($conn, $id_guru);
 
     if ($delete) {
         echo "<script>
