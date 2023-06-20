@@ -1,7 +1,13 @@
-<?php 
-include('../assets/header.php');
-?>
+<?php
 
+require '../View.php';
+
+// Define sections
+View::section('title', 'Home');
+View::section('css', '../');
+View::section('nav', '../admin/');
+// View::section('header', 'This is the header of the Home page');
+View::section('content', '<<<EOT
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -36,11 +42,12 @@ include('../assets/header.php');
                             <p>Siswa</p>
                         </div>
                         <div class="icon">
-                            <i class="ion ion-bag"></i>
+                            <i class="fas fa-user-graduate"></i>
                         </div>
                         <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
+                
                 <!-- ./col -->
                 <div class="col-lg-3 col-6">
                     <!-- small box -->
@@ -51,11 +58,12 @@ include('../assets/header.php');
                             <p>Guru</p>
                         </div>
                         <div class="icon">
-                            <i class="ion ion-stats-bars"></i>
+                            <i class="fas fa-chalkboard-teacher"></i>
                         </div>
                         <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
+
                 <!-- ./col -->
                 <div class="col-lg-3 col-6">
                     <!-- small box -->
@@ -66,7 +74,7 @@ include('../assets/header.php');
                             <p>Bidang Studi</p>
                         </div>
                         <div class="icon">
-                            <i class="ion ion-person-add"></i>
+                            <i class="fas fa-book-open"></i>
                         </div>
                         <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                     </div>
@@ -81,7 +89,7 @@ include('../assets/header.php');
                             <p>Kelas</p>
                         </div>
                         <div class="icon">
-                            <i class="ion ion-pie-graph"></i>
+                            <i class="fas fa-school"></i>
                         </div>
                         <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                     </div>
@@ -239,5 +247,8 @@ include('../assets/header.php');
     <!-- /.content -->
 </div>
 <!-- /.content-wrapper -->
+');
+// View::section('footer', 'This is the footer of the Home page');
 
-<?php include('../assets/footer.php'); ?>
+// Render the home view
+View::extend('views/layout.php');

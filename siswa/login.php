@@ -41,7 +41,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $_SESSION['siswa_username'] = $username;
     $success_message = "Login berhasil";
     header("Location: index.php");
-    
+
     exit();
   } else {
     $error_message = "Username atau password salah";
@@ -77,7 +77,7 @@ $conn->close();
 </head>
 
 <body class="hold-transition login-page">
-  
+
   <?php if (isset($error_message)) : ?>
     <div id="toast-container" class="toast-top-right">
       <div class="toast toast-error" aria-live="assertive" style="display: block;">
@@ -92,13 +92,13 @@ $conn->close();
       }, 2000);
     </script>
   <?php endif; ?>
-  
+
 
   <div class="login-box">
     <!-- /.login-logo -->
     <div class="card card-outline card-primary">
       <div class="card-header text-center">
-        <img src="../img/logo.png" alt="logo">
+        <img src="../assets/img/logo.png" alt="logo">
         </br>
         <a href="../../index2.html" class="h1"><b>Login</b> Siswa</a>
       </div>

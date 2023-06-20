@@ -1,9 +1,10 @@
 <?php
 // Koneksi ke database
-require_once('../koneksi.php');
+require_once('../../koneksi.php');
+require '../../view.php';
 
 // Fungsi untuk menambahkan siswa dan generate pengguna
-function tambahSiswa($NISN, $nama_siswa, $jenis_kelamin, $tanggal_lahir, $alamat, $nomor_telepon, $email)
+function createSiswa($NISN, $nama_siswa, $jenis_kelamin, $tanggal_lahir, $alamat, $nomor_telepon, $email)
 {
     // Kode tambahan untuk validasi data siswa jika diperlukan
 
@@ -46,34 +47,46 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $nomor_telepon = $_POST["nomor_telepon"];
     $email = $_POST["email"];
 
-    tambahSiswa($NISN, $nama_siswa, $jenis_kelamin, $tanggal_lahir, $alamat, $nomor_telepon, $email);
+    createSiswa($NISN, $nama_siswa, $jenis_kelamin, $tanggal_lahir, $alamat, $nomor_telepon, $email);
 
     // Redirect ke halaman baru setelah form diproses
-    header("Location: success.php");
+    header("Location: index.php");
     exit();
 }
 
+View::section('title', 'SMPIT Auliya');
+View::section('css', '../../');
+View::section('nav', '../');
+// View::section('header', 'This is the header of the Home page');
 
-// Tutup koneksi ke database
-$conn->close();
-?>
+$content = '
+<!-- Content Wrapper. Contains page content -->
 
-<!DOCTYPE html>
-<html lang="en">
+        <div class="content-wrapper">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tambah Siswa</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
-</head>
+            <!-- Content Header (Page header) -->
+            <div class="content-header">
+                <div class="container-fluid">
+                    <div class="row mb-2">
+                        <div class="col-sm-6">
+                            <h1 class="m-0">Siswa</h1>
+                        </div><!-- /.col -->
+                        <div class="col-sm-6">
+                            <ol class="breadcrumb float-sm-right">
+                                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                                <li class="breadcrumb-item active">Dashboard</li>
+                            </ol>
+                        </div><!-- /.col -->
+                    </div><!-- /.row -->
+                </div><!-- /.container-fluid -->
+            </div>
+            <!-- /.content-header -->
 
-<body>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-6 offset-md-3 mt-5">
-                <h2>Tambah Siswa</h2>
-                <form action="<?php echo $_SERVER["PHP_SELF"]; ?>" method="POST">
+            <section class="content">
+                <div class="my-3 p-3 bg-body rounded shadow-sm">
+                <div class="card">
+                <div class="card-body">
+                <form action="" method="POST">
                     <div class="mb-3">
                         <label for="NISN" class="form-label">Nomor Induk</label>
                         <input type="text" class="form-control" id="NISN" name="NISN" required>
@@ -82,13 +95,9 @@ $conn->close();
                         <label for="nama_siswa" class="form-label">Nama Siswa</label>
                         <input type="text" class="form-control" id="nama_siswa" name="nama_siswa" required>
                     </div>
-                    <!-- <div class="mb-3">
-                        <label for="id_kelas" class="form-label">ID Kelas</label>
-                        <input type="text" class="form-control" id="id_kelas" name="id_kelas" required>
-                    </div> -->
                     <div class="mb-3">
                         <label for="jenis_kelamin" class="form-label">Jenis Kelamin</label>
-                        <select class="form-select" id="jenis_kelamin" name="jenis_kelamin" required>
+                        <select class="form-control" id="jenis_kelamin" name="jenis_kelamin" required>
                             <option value="Laki-laki">Laki-laki</option>
                             <option value="Perempuan">Perempuan</option>
                         </select>
@@ -111,10 +120,15 @@ $conn->close();
                     </div>
                     <button type="submit" class="btn btn-primary">Tambah Siswa</button>
                 </form>
-            </div>
-        </div>
-    </div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
-</body>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>';
 
-</html>
+View::section('content', $content);
+// Render the home view
+View::extend('views/layout.php');
+
+        
+        

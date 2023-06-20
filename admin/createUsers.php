@@ -36,16 +36,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <h2>Tambah Pengguna</h2>
 
     <form method="POST" action="">
-        <label for="username">Username:</label>
+        <label for="username">Username :</label>
         <input type="text" id="username" name="username" required><br>
 
-        <label for="password">Password:</label>
+        <label for="password">Password :</label>
         <input type="password" id="password" name="password" required><br>
 
-        <label for="role">Role:</label>
+        <label for="role">Role :</label>
         <select id="role" name="role">
             <option value="admin">Admin</option>
-            <option value="user">User</option>
+            <option value="guru">Guru</option>
+            <option value="siswa">Siswa</option>
         </select><br>
 
         <input type="submit" value="Tambah Pengguna">

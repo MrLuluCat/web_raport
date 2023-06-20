@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 19, 2023 at 09:45 AM
+-- Generation Time: Jun 19, 2023 at 04:26 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.1.12
 
@@ -29,7 +29,8 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `bidang_studi` (
   `id_bidang_studi` int(11) NOT NULL,
-  `nama_bidang_studi` varchar(100) DEFAULT NULL
+  `nama_bidang_studi` varchar(100) DEFAULT NULL,
+  `id_guru` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -54,10 +55,7 @@ CREATE TABLE `catatan` (
 CREATE TABLE `grade` (
   `id_grade` int(11) NOT NULL,
   `id_siswa` int(11) DEFAULT NULL,
-  `id_wali_kelas` int(11) DEFAULT NULL,
   `id_bidang_studi` int(11) DEFAULT NULL,
-  `tahun_pengajaran` varchar(10) DEFAULT NULL,
-  `semester` varchar(20) DEFAULT NULL,
   `kuis_1` decimal(4,2) DEFAULT NULL,
   `kuis_2` decimal(4,2) DEFAULT NULL,
   `kuis_3` decimal(4,2) DEFAULT NULL,
@@ -76,9 +74,7 @@ CREATE TABLE `grade` (
   `remedial_uts` decimal(4,2) DEFAULT NULL,
   `nilai_uas` decimal(4,2) DEFAULT NULL,
   `remedial_uas` decimal(4,2) DEFAULT NULL,
-  `nilai_raport` decimal(4,2) DEFAULT NULL,
-  `tempat_terbit` varchar(100) DEFAULT NULL,
-  `tanggal_terbit` date DEFAULT NULL
+  `nilai_raport` decimal(4,2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -115,7 +111,10 @@ CREATE TABLE `kelas` (
 --
 
 INSERT INTO `kelas` (`id_kelas`, `tingkat_kelas`, `nama_kelas`) VALUES
-(1, '7', 'Hasyim Ashari 2');
+(1, '7', 'Hasyim Ashari'),
+(4, '7', 'Ahmad Dahlan'),
+(5, '7', 'Wahid Hasyim'),
+(6, '8', 'Pattimura');
 
 -- --------------------------------------------------------
 
@@ -129,6 +128,26 @@ CREATE TABLE `ketidakhadiran` (
   `sakit` int(11) DEFAULT NULL,
   `izin` int(11) DEFAULT NULL,
   `alpha` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `raport`
+--
+
+CREATE TABLE `raport` (
+  `id_raport` int(11) NOT NULL,
+  `id_siswa` int(11) NOT NULL,
+  `id_kelas` int(11) NOT NULL,
+  `tahun_pengajaran` varchar(10) DEFAULT NULL,
+  `semester` varchar(20) DEFAULT NULL,
+  `id_grade` int(11) DEFAULT NULL,
+  `id_ketidakhadiran` int(11) DEFAULT NULL,
+  `id_wali_kelas` int(11) DEFAULT NULL,
+  `id_catatan` int(11) DEFAULT NULL,
+  `tempat_terbit` varchar(100) DEFAULT NULL,
+  `tanggal_terbit` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -153,7 +172,7 @@ CREATE TABLE `siswa` (
 --
 
 INSERT INTO `siswa` (`id_siswa`, `NISN`, `nama_siswa`, `jenis_kelamin`, `tanggal_lahir`, `alamat`, `nomor_telepon`, `email`) VALUES
-(1, '2111500209', 'billie', 'Laki-laki', '2002-04-18', 'Puri Kartika 2 Indah', '081288085618', 'billie11@mail.com');
+(1, '2111500209', 'billie', 'Laki-laki', '2002-04-18', 'Puri Kartika 2 Indah permai', '081288085618', 'billie11@mail.com');
 
 -- --------------------------------------------------------
 
@@ -197,7 +216,8 @@ CREATE TABLE `wali_kelas` (
 -- Indexes for table `bidang_studi`
 --
 ALTER TABLE `bidang_studi`
-  ADD PRIMARY KEY (`id_bidang_studi`);
+  ADD PRIMARY KEY (`id_bidang_studi`),
+  ADD KEY `id_guru` (`id_guru`);
 
 --
 -- Indexes for table `catatan`
@@ -213,7 +233,6 @@ ALTER TABLE `catatan`
 ALTER TABLE `grade`
   ADD PRIMARY KEY (`id_grade`),
   ADD KEY `id_siswa` (`id_siswa`),
-  ADD KEY `id_wali_kelas` (`id_wali_kelas`),
   ADD KEY `id_bidang_studi` (`id_bidang_studi`);
 
 --
@@ -234,6 +253,18 @@ ALTER TABLE `kelas`
 ALTER TABLE `ketidakhadiran`
   ADD PRIMARY KEY (`id_ketidakhadiran`),
   ADD KEY `id_siswa` (`id_siswa`);
+
+--
+-- Indexes for table `raport`
+--
+ALTER TABLE `raport`
+  ADD PRIMARY KEY (`id_raport`),
+  ADD KEY `fk_raport_siswa` (`id_siswa`),
+  ADD KEY `fk_raport_kelas` (`id_kelas`),
+  ADD KEY `fk_raport_grade` (`id_grade`),
+  ADD KEY `fk_raport_ketidakhadiran` (`id_ketidakhadiran`),
+  ADD KEY `fk_raport_wali_kelas` (`id_wali_kelas`),
+  ADD KEY `fk_raport_catatan` (`id_catatan`);
 
 --
 -- Indexes for table `siswa`
@@ -287,7 +318,7 @@ ALTER TABLE `guru`
 -- AUTO_INCREMENT for table `kelas`
 --
 ALTER TABLE `kelas`
-  MODIFY `id_kelas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_kelas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `ketidakhadiran`
@@ -318,6 +349,12 @@ ALTER TABLE `wali_kelas`
 --
 
 --
+-- Constraints for table `bidang_studi`
+--
+ALTER TABLE `bidang_studi`
+  ADD CONSTRAINT `id_guru` FOREIGN KEY (`id_guru`) REFERENCES `guru` (`id_guru`);
+
+--
 -- Constraints for table `catatan`
 --
 ALTER TABLE `catatan`
@@ -336,6 +373,17 @@ ALTER TABLE `grade`
 --
 ALTER TABLE `ketidakhadiran`
   ADD CONSTRAINT `ketidakhadiran_ibfk_1` FOREIGN KEY (`id_siswa`) REFERENCES `siswa` (`id_siswa`);
+
+--
+-- Constraints for table `raport`
+--
+ALTER TABLE `raport`
+  ADD CONSTRAINT `fk_raport_catatan` FOREIGN KEY (`id_catatan`) REFERENCES `catatan` (`id_catatan`),
+  ADD CONSTRAINT `fk_raport_grade` FOREIGN KEY (`id_grade`) REFERENCES `grade` (`id_grade`),
+  ADD CONSTRAINT `fk_raport_kelas` FOREIGN KEY (`id_kelas`) REFERENCES `kelas` (`id_kelas`),
+  ADD CONSTRAINT `fk_raport_ketidakhadiran` FOREIGN KEY (`id_ketidakhadiran`) REFERENCES `ketidakhadiran` (`id_ketidakhadiran`),
+  ADD CONSTRAINT `fk_raport_siswa` FOREIGN KEY (`id_siswa`) REFERENCES `siswa` (`id_siswa`),
+  ADD CONSTRAINT `fk_raport_wali_kelas` FOREIGN KEY (`id_wali_kelas`) REFERENCES `wali_kelas` (`id_wali_kelas`);
 
 --
 -- Constraints for table `wali_kelas`

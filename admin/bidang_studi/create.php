@@ -2,39 +2,41 @@
 require '../../view.php';
 require_once('../../koneksi.php');
 
-// Ambil ID Kelas dari URL
-// $id_kelas = $_GET['id_kelas'];
-$id_kelas = isset($_GET["id_kelas"]) ? $_GET["id_kelas"] : "";
+$query = "SELECT b.id_guru, g.nama_guru FROM bidang_studi b
+          JOIN guru g ON b.id_guru = g.id_guru";
 
-// Ambil ID Kelas dari query database langsung
-$query = "SELECT * FROM kelas WHERE id_kelas = '$id_kelas'";
 $result = mysqli_query($conn, $query);
-$kelas = mysqli_fetch_assoc($result);
 
-// Pastikan data kelas ada sebelum melanjutkan
-if (!$kelas) {
-    echo "Data kelas tidak ditemukan.";
-    exit;
+if (mysqli_num_rows($result) > 0) {
+    $options = '';
+    while ($row = mysqli_fetch_assoc($result)) {
+        $idGuru = $row['id_guru'];
+        $namaGuru = $row['nama_guru'];
+
+        // Buat opsi dalam elemen select
+        $options .= '<option value="' . $idGuru . '">' . $namaGuru . '</option>';
+    }
+} else {
+    $options = '<option value="">Tidak ada data guru</option>';
 }
 
-// Update data kelas
 if (isset($_POST['submit'])) {
-    $tingkat_kelas = mysqli_real_escape_string($conn, $_POST['tingkat_kelas']);
-    $nama_kelas = mysqli_real_escape_string($conn, $_POST['nama_kelas']);
+    // Sanitasi input
+    $nama_bidang_studi = mysqli_real_escape_string($conn, $_POST['nama_bidang_studi']);
+    $id_guru = mysqli_real_escape_string($conn, $_POST['id_guru']);
 
-    $query = "UPDATE kelas SET tingkat_kelas='$tingkat_kelas', nama_kelas='$nama_kelas' WHERE id_kelas='$id_kelas'";
+    $query = "INSERT INTO bidang_studi (nama_bidang_studi, id_guru) VALUES ('$nama_bidang_studi', '$id_guru')";
     $result = mysqli_query($conn, $query);
 
     // Tambahkan pesan sukses/kesalahan
     if ($result) {
-        $pesan = "Data kelas berhasil diperbarui.";
-        header("Location: index.php");
+        $pesan = "Data Bidang Studi berhasil ditambahkan.";
+        header("Location:index.php");
     } else {
-        $pesan = "Terjadi kesalahan saat memperbarui data kelas.";
+        $pesan = "Terjadi kesalahan saat menambahkan data kelas.";
     }
 }
 
-// Define sections
 View::section('title', 'SMPIT Auliya');
 View::section('css', '../../');
 View::section('nav', '../');
@@ -59,6 +61,7 @@ $content = '<!-- Content Wrapper. Contains page content -->
                 </div><!-- /.container-fluid -->
             </div>
             <!-- /.content-header -->
+
             <section class="content">
                 <div class="my-3 p-3 bg-body rounded shadow-sm">
 
@@ -66,17 +69,22 @@ $content = '<!-- Content Wrapper. Contains page content -->
                         <div class="card-body">
                             <form action="" method="POST">
                                 <div class="form-group">
-                                    <label for="tingkat_kelas">Tingkat Kelas:</label>
-                                    <!-- <input type="text" class="form-control" id="tingkat_kelas" name="tingkat_kelas"> -->
-                                    <select class="form-control" id="tingkat_kelas" name="tingkat_kelas">
-                                        <option value="7" ' . ($kelas['tingkat_kelas'] == '7' ? 'selected' : '') . '>Kelas 7</option>
-                                        <option value="8" ' . ($kelas['tingkat_kelas'] == '8' ? 'selected' : '') . '>Kelas 8</option>
-                                        <option value="9" ' . ($kelas['tingkat_kelas'] == '9' ? 'selected' : '') . '>Kelas 9</option>
-                                    </select>
+                                    <div>
+                                    <label class="mb-2">Bidang Studi</label>
+                                    <div class="form-floating mb-3">
+                                        <input
+                                        type="text"
+                                        class="form-control"
+                                        id="nama_bidang_studi"
+                                        name="nama_bidang_studi"
+                                        required
+                                        />
                                 </div>
                                 <div class="form-group">
-                                    <label for="nama_kelas">Nama Kelas:</label>
-                                    <input type="text" value="' .$kelas['nama_kelas']. '" class="form-control" id="nama_kelas" name="nama_kelas">
+                                    <label class="mb-2">Guru Bidang Studi</label>
+                                    <select class="form-control" id="id_guru" name="id_guru">
+                                        ' . $options . '
+                                    </select>
                                 </div>
                                 <button type="submit" class="btn btn-primary" name="submit">Submit</button>
                             </form>
@@ -85,9 +93,11 @@ $content = '<!-- Content Wrapper. Contains page content -->
 
                 </div>
             </section>
-        </div>
         </div>';
 
 View::section('content', $content);
 // Render the home view
 View::extend('views/layout.php');
+
+        
+        

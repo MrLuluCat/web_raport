@@ -76,7 +76,7 @@ $conn->close();
 </head>
 
 <body class="hold-transition login-page">
-  
+
   <?php if (isset($error_message)) : ?>
     <div id="toast-container" class="toast-top-right">
       <div class="toast toast-error" aria-live="assertive" style="display: block;">
@@ -97,7 +97,7 @@ $conn->close();
       <!-- /.login-logo -->
       <div class="card card-outline card-primary">
         <div class="card-header text-center">
-          <img src="../img/logo.png" alt="logo">
+          <img src="../assets/img/logo.png" alt="logo">
           </br>
           <a href="../../index2.html" class="h1"><b>Login</b> Guru</a>
         </div>
@@ -144,7 +144,7 @@ $conn->close();
               <!-- <i class="fas fa-chalkboard-teacher"></i> Login Sebagai Guru -->
               <i class="fas fa-user-graduate mr-2"></i> Login Sebagai Siswa
             </a>
-            <a href="../siswa/login.php" class="btn btn-block btn-outline-danger">
+            <a href="../admin/login.php" class="btn btn-block btn-outline-danger">
               <i class="fas fa-user-cog mr-1"></i> Login Sebagai Admin
             </a>
 

@@ -2,7 +2,7 @@
 
 
 
-function login($username, $password)
+function loginAdmin($username, $password)
 {
     // Mengenkripsi password menggunakan SHA256
     $hashedPassword = hash('sha256', $password);
@@ -39,7 +39,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $password = $_POST['password'];
 
     // Memanggil fungsi login
-    $error_message = login($username, $password);
+    $error_message = loginAdmin($username, $password);
 }
 ?>
 
@@ -90,9 +90,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <!-- /.login-logo -->
         <div class="card card-outline card-primary">
             <div class="card-header text-center">
-                <img src="../img/logo.png" alt="logo">
+                <img src="../assets/img/logo.png" alt="logo">
                 </br>
-                <a href="../../index2.html" class="h1"><b>Login</b> Admin</a>
+                <a href="#" class="h1"><b>Login</b> Admin</a>
             </div>
             <div class="card-body">
                 <p class="login-box-msg">Sign in to start your session</p>
