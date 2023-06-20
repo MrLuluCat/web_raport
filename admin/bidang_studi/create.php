@@ -2,8 +2,7 @@
 require '../../view.php';
 require_once('../../koneksi.php');
 
-$query = "SELECT b.id_guru, g.nama_guru FROM bidang_studi b
-          JOIN guru g ON b.id_guru = g.id_guru";
+$query = "SELECT * FROM guru";
 
 $result = mysqli_query($conn, $query);
 

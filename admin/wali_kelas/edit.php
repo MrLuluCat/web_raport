@@ -9,7 +9,8 @@ $query = "SELECT * FROM bidang_studi WHERE id_bidang_studi = '$id_bidang_studi'"
 $result = mysqli_query($conn, $query);
 $bidang_studi = mysqli_fetch_assoc($result);
 
-$query = "SELECT * FROM guru";
+$query = "SELECT b.id_guru, g.nama_guru FROM bidang_studi b
+          JOIN guru g ON b.id_guru = g.id_guru";
 
 $result = mysqli_query($conn, $query);
 

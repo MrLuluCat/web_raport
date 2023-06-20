@@ -2,41 +2,50 @@
 require '../../view.php';
 require_once('../../koneksi.php');
 
-$id_bidang_studi = isset($_GET["id_bidang_studi"]) ? $_GET["id_bidang_studi"] : "";
+$queryKelas = "SELECT * FROM kelas";
+$resultKelas = mysqli_query($conn, $queryKelas);
 
-// Ambil ID Kelas dari query database langsung
-$query = "SELECT * FROM bidang_studi WHERE id_bidang_studi = '$id_bidang_studi'";
-$result = mysqli_query($conn, $query);
-$bidang_studi = mysqli_fetch_assoc($result);
+$queryGuru = "SELECT * FROM guru";
+$resultGuru = mysqli_query($conn, $queryGuru);
 
-$query = "SELECT * FROM guru";
-
-$result = mysqli_query($conn, $query);
-
-if (mysqli_num_rows($result) > 0) {
-    $options = '';
-    while ($row = mysqli_fetch_assoc($result)) {
+if (mysqli_num_rows($resultGuru) > 0) {
+    $optionsGuru = '';
+    while ($row = mysqli_fetch_assoc($resultGuru)) {
         $idGuru = $row['id_guru'];
         $namaGuru = $row['nama_guru'];
 
         // Buat opsi dalam elemen select
-        $options .= '<option value="' . $idGuru . '">' . $namaGuru . '</option>';
+        $optionsGuru .= '<option value="' . $idGuru . '">' . $namaGuru . '</option>';
     }
 } else {
-    $options = '<option value="">Tidak ada data guru</option>';
+    $optionsGuru = '<option value="">Tidak ada data guru</option>';
 }
+
+if (mysqli_num_rows($resultKelas) > 0) {
+    $optionsKelas = '';
+    while ($row = mysqli_fetch_assoc($resultKelas)) {
+        $idKelas = $row['id_kelas'];
+        $namaKelas = $row['nama_kelas'];
+
+        // Buat opsi dalam elemen select
+        $optionsKelas .= '<option value="' . $idKelas . '">' . $namaKelas . '</option>';
+    }
+} else {
+    $optionsKelas = '<option value="">Tidak ada data kelas</option>';
+}
+
 
 if (isset($_POST['submit'])) {
     // Sanitasi input
-    $nama_bidang_studi = mysqli_real_escape_string($conn, $_POST['nama_bidang_studi']);
     $id_guru = mysqli_real_escape_string($conn, $_POST['id_guru']);
+    $id_kelas = mysqli_real_escape_string($conn, $_POST['id_kelas']);
 
-    $query = "UPDATE bidang_studi (nama_bidang_studi, id_guru) VALUES ('$nama_bidang_studi', '$id_guru')";
+    $query = "INSERT INTO `wali_kelas` (`id_guru`, `id_kelas`) VALUES ('$id_guru', '$id_kelas');";
     $result = mysqli_query($conn, $query);
 
     // Tambahkan pesan sukses/kesalahan
     if ($result) {
-        $pesan = "Data Bidang Studi berhasil Di Update.";
+        $pesan = "Data Bidang Studi berhasil ditambahkan.";
         header("Location:index.php");
     } else {
         $pesan = "Terjadi kesalahan saat menambahkan data kelas.";
@@ -75,22 +84,17 @@ $content = '<!-- Content Wrapper. Contains page content -->
                         <div class="card-body">
                             <form action="" method="POST">
                                 <div class="form-group">
-                                    <div>
-                                    <label class="mb-2">Bidang Studi</label>
+                                <div>
+                                    <label class="mb-2">Guru</label>
                                     <div class="form-floating mb-3">
-                                        <input
-                                        type="text"
-                                        class="form-control"
-                                        id="nama_bidang_studi"
-                                        name="nama_bidang_studi"
-                                        value="' . $bidang_studi['nama_bidang_studi'] . '"
-                                        required
-                                        />
+                                        <select class="form-control" id="id_guru" name="id_guru">
+                                        ' . $optionsGuru . '
+                                    </select>
                                 </div>
                                 <div class="form-group">
-                                    <label class="mb-2">Guru Bidang Studi</label>
-                                    <select class="form-control" id="id_guru" name="id_guru">
-                                        ' . $options . '
+                                    <label class="mb-2">Tingkat - Kelas</label>
+                                    <select class="form-control" id="id_kelas" name="id_kelas">
+                                        ' . $optionsKelas . '
                                     </select>
                                 </div>
                                 <button type="submit" class="btn btn-primary" name="submit">Submit</button>
@@ -105,3 +109,6 @@ $content = '<!-- Content Wrapper. Contains page content -->
 View::section('content', $content);
 // Render the home view
 View::extend('views/layout.php');
+
+        
+        

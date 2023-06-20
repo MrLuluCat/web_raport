@@ -73,9 +73,10 @@ $content = '<!-- Content Wrapper. Contains page content -->
                             </tr>
                         </thead>
                         <tbody>';
+                        $no = 1;
                 while ($row = mysqli_fetch_assoc($result)) {
                     $content .= '<tr>
-                                    <td>' . $row["id_guru"] . '</td>
+                                    <td>' . $no . '</td>
                                     <td>' . $row["NIP"] . '</td>
                                     <td>' . $row["nama_guru"] . '</td>
                                     <td>' . $row["jenis_kelamin"] . '</td>
@@ -84,7 +85,9 @@ $content = '<!-- Content Wrapper. Contains page content -->
                                         <a href="edit.php?id_siswa=' . $row['id_guru'] . '" class="btn-sm btn-warning">Edit</a>
                                         <a href="delete.php?id_siswa=' . $row['id_guru'] . '" class="btn-sm btn-danger">Delete</a>
                                     </td>
-                                </tr>';}
+                                </tr>';
+                            $no++;
+                        }
             $content .= '</tbody>
                     </table>
                 </div>

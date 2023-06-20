@@ -8,20 +8,24 @@ $query = "SELECT b.id_guru, g.nama_guru FROM bidang_studi b
 
 $result = mysqli_query($conn, $query);
 
-if (mysqli_num_rows($result) > 0) {
-    $options = '';
+$options = ''; // Inisialisasi variabel dengan string kosong
+
+if (mysqli_num_rows($result) > 1) {
     while ($row = mysqli_fetch_assoc($result)) {
         $idGuru = $row['id_guru'];
         $namaGuru = $row['nama_guru'];
 
-        // Buat opsi dalam elemen select
+        // Gabungkan opsi-opsi dalam elemen select
         $options .= '<option value="' . $idGuru . '">' . $namaGuru . '</option>';
     }
 } else {
     $options = '<option value="">Tidak ada data guru</option>';
 }
 
-$query = "SELECT * FROM bidang_studi";
+
+$query = "SELECT bidang_studi.id_bidang_studi, bidang_studi.nama_bidang_studi, guru.nama_guru
+FROM bidang_studi
+JOIN guru ON bidang_studi.id_guru = guru.id_guru;";
 $result = mysqli_query($conn, $query);
 // Define sections
 View::section('title', 'SMPIT Auliya');
@@ -63,15 +67,17 @@ $content = '<!-- Content Wrapper. Contains page content -->
                             </tr>
                         </thead>
                         <tbody>';
+                        $no = 1;
                         while ($row = mysqli_fetch_assoc($result)) {
                             $content .= '<tr>
-                                    <td>' . $row["id_bidang_studi"] . '</td>
+                                    <td>' . $no . '</td>
                                     <td>' . $row["nama_bidang_studi"] . '</td>
-                                    <td>' . $namaGuru . '</td>
+                                    <td>' . $row["nama_guru"] . '</td>
                                     <td><a href="edit.php?id_bidang_studi=' . $row['id_bidang_studi'] . '" class="btn btn-warning btn-sm ">Edit</a>
                                         <a href="#" class="btn btn-danger btn-sm ">Delete</a>
                                     </td>
                                 </tr>';
+                                $no++;
                             }
                         $content .= '</tbody>
                     </table>
