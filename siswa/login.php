@@ -2,7 +2,7 @@
 session_start();
 
 // Kode untuk memeriksa apakah pengguna sudah login sebelumnya
-if (isset($_SESSION['siswa_username'])) {
+if (isset($_SESSION['siswa'])) {
   header("Location: index.php");
   exit();
 }
@@ -10,7 +10,7 @@ if (isset($_SESSION['siswa_username'])) {
 // Koneksi ke database dan fungsi validasi login
 require_once('../koneksi.php');
 
-function validasiLogin($username, $password)
+function Login($username, $password)
 {
   global $conn;
 
@@ -37,11 +37,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   $username = $_POST["username"];
   $password = $_POST["password"];
 
-  if (validasiLogin($username, $password)) {
-    $_SESSION['siswa_username'] = $username;
+  if (Login($username, $password)) {
+    $_SESSION['siswa'] = $username;
     $success_message = "Login berhasil";
     header("Location: index.php");
-
     exit();
   } else {
     $error_message = "Username atau password salah";
@@ -50,6 +49,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 // Tutup koneksi ke database
 $conn->close();
+
 ?>
 
 <!DOCTYPE html>
@@ -62,16 +62,16 @@ $conn->close();
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <script src="https://kit.fontawesome.com/ec930b21b5.js" crossorigin="anonymous"></script>
+  <!-- Theme style -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/css/adminlte.min.css">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="../assets/plugins/fontawesome-free/css/all.min.css">
   <!-- icheck bootstrap -->
   <link rel="stylesheet" href="../assets/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
-  <!-- Theme style -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/css/adminlte.min.css">
   <!-- Toastr -->
   <link rel="stylesheet" href="../assets/plugins/toastr/toastr.min.css">
 
-  <script src="https://kit.fontawesome.com/ec930b21b5.js" crossorigin="anonymous"></script>
 
   <link rel="stylesheet" href="../assets/dist/css/adminlte.min.css">
 </head>
@@ -107,7 +107,7 @@ $conn->close();
 
         <form action="<?php echo $_SERVER["PHP_SELF"]; ?>" method="post">
           <div class="input-group mb-3">
-            <input id="username" name="username" class="form-control" placeholder="Username">
+            <input id="username" name="username" class="form-control" placeholder="Username" required>
             <div class="input-group-append">
               <div class="input-group-text">
                 <span class="fas fa-user"></span>
@@ -115,7 +115,7 @@ $conn->close();
             </div>
           </div>
           <div class="input-group mb-3">
-            <input type="password" class="form-control" id="password" name="password" placeholder="Password">
+            <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
             <div class="input-group-append">
               <div class="input-group-text">
                 <span class="fas fa-lock"></span>

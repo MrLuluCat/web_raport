@@ -57,43 +57,6 @@ if (isset($_POST['submit'])) {
     }
 }
 
-
-// Fungsi untuk mengupdate data guru
-// function updateguru($id_guru, $nama_guru, $jenis_kelamin, $tanggal_lahir, $alamat, $nomor_telepon, $email)
-// {
-// global $conn;
-
-// // Update data guru berdasarkan NIP
-// $sql = "UPDATE guru SET guru='$nama_guru', jenis_kelamin='$jenis_kelamin', tanggal_lahir='$tanggal_lahir',
-// alamat='$alamat', nomor_telepon='$nomor_telepon', email='$email' WHERE id_guru ='$id_guru'";
-// var_dump($id_guru);
-// if ($conn->query($sql) === TRUE) {
-// echo "guru berhasil diperbarui.";
-// header("Location: index.php");
-// exit();
-// } else {
-// echo "Error: " . $sql . "<br>" . $conn->error;
-// }
-// }
-
-// // ...
-
-
-// // Query untuk mendapatkan data guru berdasarkan ID
-// $sql = "SELECT * FROM guru WHERE id_guru ='$id_guru'";
-
-// $result = $conn->query($sql);
-
-// if (isset($_POST['submit'])) {
-// updateguru($id_guru, $nama_guru,
-// $jenis_kelamin, $tanggal_lahir, $alamat,
-// $nomor_telepon, $email);
-// } else {
-// // Jika informasi guru tidak ditemukan, lakukan penanganan sesuai kebutuhan Anda
-// echo "Informasi guru tidak ditemukan.";
-// exit();
-// }
-
 // Tutup koneksi ke database
 $conn->close();
 ?>

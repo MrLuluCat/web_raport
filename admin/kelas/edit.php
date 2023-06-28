@@ -22,7 +22,9 @@ if (isset($_POST['submit'])) {
     $tingkat_kelas = mysqli_real_escape_string($conn, $_POST['tingkat_kelas']);
     $nama_kelas = mysqli_real_escape_string($conn, $_POST['nama_kelas']);
 
-    $query = "UPDATE kelas SET tingkat_kelas='$tingkat_kelas', nama_kelas='$nama_kelas' WHERE id_kelas='$id_kelas'";
+    $query = "UPDATE kelas 
+    SET tingkat_kelas='$tingkat_kelas', nama_kelas='$nama_kelas' 
+    WHERE id_kelas='$id_kelas'";
     $result = mysqli_query($conn, $query);
 
     // Tambahkan pesan sukses/kesalahan
@@ -69,9 +71,9 @@ $content = '<!-- Content Wrapper. Contains page content -->
                                     <label for="tingkat_kelas">Tingkat Kelas:</label>
                                     <!-- <input type="text" class="form-control" id="tingkat_kelas" name="tingkat_kelas"> -->
                                     <select class="form-control" id="tingkat_kelas" name="tingkat_kelas">
-                                        <option value="7" ' . ($kelas['tingkat_kelas'] == '7' ? 'selected' : '') . '>Kelas 7</option>
-                                        <option value="8" ' . ($kelas['tingkat_kelas'] == '8' ? 'selected' : '') . '>Kelas 8</option>
-                                        <option value="9" ' . ($kelas['tingkat_kelas'] == '9' ? 'selected' : '') . '>Kelas 9</option>
+                                        <option value="Kelas 7" ' . ($kelas['tingkat_kelas'] == 'Kelas 7' ? 'selected' : '') . '>Kelas 7</option>
+                                        <option value="Kelas 8" ' . ($kelas['tingkat_kelas'] == 'Kelas 8' ? 'selected' : '') . '>Kelas 8</option>
+                                        <option value="Kelas 9" ' . ($kelas['tingkat_kelas'] == 'Kelas 9' ? 'selected' : '') . '>Kelas 9</option>
                                     </select>
                                 </div>
                                 <div class="form-group">

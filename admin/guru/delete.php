@@ -1,6 +1,6 @@
 <?php
 // Koneksi ke database
-require_once('../koneksi.php');
+require_once('../../koneksi.php');
 
 // Mendapatkan ID guru dari URL
 $id_guru = isset($_GET["id_guru"]) ? $_GET["id_guru"] : "";
@@ -9,18 +9,43 @@ $id_guru = isset($_GET["id_guru"]) ? $_GET["id_guru"] : "";
 $query = "SELECT * FROM guru WHERE id_guru = '$id_guru'";
 $result = mysqli_query($conn, $query);
 
-if ($result && mysqli_num_rows($result) == 1) {
-    $row = mysqli_fetch_assoc($result);
-    $nama_guru = $row["nama_guru"];
-    $jenis_kelamin = $row["jenis_kelamin"];
-    $tanggal_lahir = $row["tanggal_lahir"];
-    $alamat = $row["alamat"];
-    $nomor_telepon = $row["nomor_telepon"];
-    $email = $row["email"];
-} else {
-    echo "Informasi guru tidak ditemukan.";
-    exit();
-}
+$row = mysqli_fetch_assoc($result);
+$nama_guru = $row["nama_guru"];
+$jenis_kelamin = $row["jenis_kelamin"];
+$tanggal_lahir = $row["tanggal_lahir"];
+$alamat = $row["alamat"];
+$nomor_telepon = $row["nomor_telepon"];
+$email = $row["email"];
+
+// Fungsi untuk menghapus semua bidang studi terkait
+// function hapusBidangStudi($conn, $id_guru)
+// {
+//     // Query untuk menghapus bidang studi terkait berdasarkan id_guru
+//     $sql = "DELETE FROM bidang_studi WHERE id_guru = '$id_guru'";
+//     $result = mysqli_query($conn, $sql);
+
+//     if (!$result) {
+//         echo "Error: " . mysqli_error($conn);
+//         return false;
+//     }
+
+//     return true;
+// }
+
+// Fungsi untuk menghapus semua bidang studi terkait
+// function hapusWaliKelas($conn, $id_guru)
+// {
+//     // Query untuk menghapus bidang studi terkait berdasarkan id_guru
+//     $sql = "DELETE FROM id_bidang_studi WHERE id_wali_kelas = '$id_guru'";
+//     $result = mysqli_query($conn, $sql);
+
+//     if (!$result) {
+//         echo "Error: " . mysqli_error($conn);
+//         return false;
+//     }
+
+//     return true;
+// }
 
 // Fungsi untuk menghapus guru dan pengguna dari database
 function deleteGuru($conn, $id_guru)
@@ -51,7 +76,7 @@ function deleteGuru($conn, $id_guru)
     }
 
     // Menghapus data guru dari tabel guru
-    $queryDelete = "DELETE FROM guru WHERE id_guru = '$id_guru'";
+    $queryDelete = "DELETE FROM guru WHERE id_guru = $id_guru";
     $resultDelete = mysqli_query($conn, $queryDelete);
 
     if ($resultDelete) {
@@ -65,20 +90,30 @@ function deleteGuru($conn, $id_guru)
 if (isset($_POST['delete'])) {
     $id_guru = $_POST['id_guru'];
 
-    // Panggil fungsi deleteguru untuk menghapus guru dan pengguna dari database
-    $delete = deleteGuru($conn, $id_guru);
-
-    if ($delete) {
-        echo "<script>
+        // Menghapus guru setelah bidang studi terkait dihapus
+        if (deleteGuru($conn, $id_guru)) {
+            echo "<script>
                 alert('Data Berhasil Di Hapus');
-                window.location='logout.php';
+                window.location='../logout.php';
             </script>";
-        // header("Location: logout.php");
-        exit();
-    } else {
-        echo "Gagal menghapus guru.";
+        } else {
+            echo "Gagal menghapus guru.";
+        }
+
+        // Panggil fungsi deleteguru untuk menghapus guru dan pengguna dari database
+        // $delete = deleteGuru($conn, $id_guru);
+
+        // if ($delete) {
+        //     echo "<script>
+        //             alert('Data Berhasil Di Hapus');
+        //             window.location='../logout.php';
+        //         </script>";
+        //     // header("Location: logout.php");
+        //     exit();
+        // } else {
+        //     echo "Gagal menghapus guru.";
     }
-}
+
 ?>
 
 <!DOCTYPE html>
@@ -97,17 +132,18 @@ if (isset($_POST['delete'])) {
             <div class="col-md-6 offset-md-3 mt-5">
                 <h2>Delete guru</h2>
                 <p>Anda akan menghapus guru dengan detail berikut:</p>
-                <p><strong>Nama guru:</strong> <?php echo $nama_guru; ?></p>
-                <p><strong>Jenis Kelamin:</strong> <?php echo $jenis_kelamin; ?></p>
+                <p><strong>Nama guru:</strong> <?= $row["nama_guru"]; ?></p>
+                <p><strong>Jenis Kelamin:</strong> <?= $row["jenis_kelamin"]; ?></p>
                 <p><strong>Tanggal Lahir:</strong> <?php echo $tanggal_lahir; ?></p>
                 <p><strong>Alamat:</strong> <?php echo $alamat; ?></p>
                 <p><strong>Nomor Telepon:</strong> <?php echo $nomor_telepon; ?></p>
                 <p><strong>Email:</strong> <?php echo $email; ?></p>
                 <p>Apakah Anda yakin ingin menghapus guru ini?</p>
-                <form action="<?php echo $_SERVER["PHP_SELF"] . "?id_guru=$id_guru"; ?>" method="POST">
+
+                <form action="" method="POST">
                     <input type="hidden" name="id_guru" value="<?php echo $id_guru; ?>">
                     <button type="submit" name="delete" class="btn btn-danger">Delete</button>
-                    <a href="logout.php" class="btn btn-secondary">Cancel</a>
+                    <a href="index.php" class="btn btn-secondary">Cancel</a>
                 </form>
             </div>
         </div>

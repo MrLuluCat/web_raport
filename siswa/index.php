@@ -1,32 +1,27 @@
 <?php
 session_start();
 include '../koneksi.php';
+
 // Kode untuk memeriksa apakah pengguna sudah login sebelumnya
 if (!isset($_SESSION['siswa_username'])) {
     header("Location: login.php");
     exit();
 }
 
-$query = "SELECT * FROM siswa";
-
-$result = mysqli_query($conn, $query);
-
 $username = $_SESSION['siswa_username'];
 
-if ($result->num_rows == 1) {
-    $row = $result->fetch_assoc();
-    $NISN           = $row["NISN"];
-    $nama_siswa     = $row["nama_siswa"];
-    $jenis_kelamin  = $row["jenis_kelamin"];
-    $tanggal_lahir  = $row["tanggal_lahir"];
-    $alamat         = $row["alamat"];
-    $nomor_telepon  = $row["nomor_telepon"];
-    $email          = $row["email"];
-} else {
-    // Jika informasi siswa tidak ditemukan, lakukan penanganan sesuai kebutuhan Anda
-    echo "Informasi siswa tidak ditemukan.";
-    exit();
-}
+$query = "SELECT * FROM siswa";
+$result = mysqli_query($conn, $query);
+
+$row = mysqli_fetch_assoc($result);
+$NISN           = $row["NISN"];
+$nama_siswa     = $row["nama_siswa"];
+$jenis_kelamin  = $row["jenis_kelamin"];
+$tanggal_lahir  = $row["tanggal_lahir"];
+$alamat         = $row["alamat"];
+$nomor_telepon  = $row["nomor_telepon"];
+$email          = $row["email"];
+
 ?>
 
 <!doctype html>
@@ -35,7 +30,7 @@ if ($result->num_rows == 1) {
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bootstrap demo</title>
+    <title>WEB Rapot</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
 </head>
 
@@ -45,11 +40,11 @@ if ($result->num_rows == 1) {
             <div class="col-lg-9">
                 <div class="card h-auto">
                     <div class="card-header">
-                        <h3 class="card-title">Selamat Datang, <?php echo $username ?></h3>
+                        <h3 class="card-title">Selamat Datang, <?php echo $nama_siswa ?></h3>
                     </div>
                     <div class="card-body h-auto">
                         <div class="flex-row d-flex">
-                            <img src="../assets/img/logo2.png" alt="logo" style="width: 180px; height: 150px" />
+                            <img src="../assets/img/logo.png" alt="logo" style="width: 203px; height: 249px" />
 
                             <div class="ms-5">
                                 <div class="d-flex flex-row">
@@ -92,6 +87,9 @@ if ($result->num_rows == 1) {
                     </div>
                     <div class="card-body">
                         <a href="#" class="btn btn-primary">Lihat Raport</a>
+                        <form class="d-inline" action="logout.php" method="post">
+                            <button name="logout" id="logout" class="btn btn-danger d-inline">Logout</button>
+                        </form>
                     </div>
                 </div>
             </div>

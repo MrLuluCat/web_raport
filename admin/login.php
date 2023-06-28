@@ -2,7 +2,7 @@
 
 
 
-function loginAdmin($username, $password)
+function LoginAdmin($username, $password)
 {
     // Mengenkripsi password menggunakan SHA256
     $hashedPassword = hash('sha256', $password);
@@ -39,7 +39,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $password = $_POST['password'];
 
     // Memanggil fungsi login
-    $error_message = loginAdmin($username, $password);
+    $error_message = LoginAdmin($username, $password);
 }
 ?>
 

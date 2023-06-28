@@ -1,14 +1,47 @@
 <?php
 
 require '../View.php';
+require_once('../koneksi.php');
 
+$sqlSiswa = "SELECT COUNT(*) AS id_siswa FROM siswa";
+$resultSiswa = mysqli_query($conn, $sqlSiswa);
+
+$sqlGuru = "SELECT COUNT(*) AS id_guru FROM guru";
+$resultGuru = mysqli_query($conn, $sqlGuru);
+
+$sqlKelas = "SELECT COUNT(*) AS id_kelas FROM kelas";
+$resultKelas = mysqli_query($conn, $sqlKelas);
+
+$sqlBidang_studi = "SELECT COUNT(*) AS id_bidang_studi FROM bidang_studi";
+$resultBidang_studi = mysqli_query($conn, $sqlBidang_studi);
+
+if ($resultSiswa) {
+    // Mengambil hasil sebagai array asosiatif
+    $row = mysqli_fetch_assoc($resultSiswa);
+    $jumlahSiswa = $row["id_siswa"];
+}
+if ($resultGuru) {
+    // Mengambil hasil sebagai array asosiatif
+    $row = mysqli_fetch_assoc($resultGuru);
+    $jumlahGuru = $row["id_guru"];
+}
+if ($resultKelas) {
+    // Mengambil hasil sebagai array asosiatif
+    $row = mysqli_fetch_assoc($resultKelas);
+    $jumlahKelas = $row["id_kelas"];
+}
+if ($resultBidang_studi) {
+    // Mengambil hasil sebagai array asosiatif
+    $row = mysqli_fetch_assoc($resultBidang_studi);
+    $jumlahBidang_studi = $row["id_bidang_studi"];
+}
 // Define sections
 View::section('title', 'Home');
 View::section('css', '../');
 View::section('nav', '../admin/');
 // View::section('header', 'This is the header of the Home page');
-View::section('content', '<<<EOT
-<!-- Content Wrapper. Contains page content -->
+
+$content = '<!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <div class="content-header">
@@ -36,11 +69,12 @@ View::section('content', '<<<EOT
                 <div class="col-lg-3 col-6">
                     <!-- small box -->
                     <div class="small-box bg-info">
-                        <div class="inner">
-                            <h3>150</h3>
 
+                        <div class="inner">
+                            <h3>' . $jumlahSiswa . '</h3>
                             <p>Siswa</p>
                         </div>
+
                         <div class="icon">
                             <i class="fas fa-user-graduate"></i>
                         </div>
@@ -53,7 +87,7 @@ View::section('content', '<<<EOT
                     <!-- small box -->
                     <div class="small-box bg-success">
                         <div class="inner">
-                            <h3>53<sup style="font-size: 20px">%</sup></h3>
+                            <h3>'. $jumlahGuru . '</h3>
 
                             <p>Guru</p>
                         </div>
@@ -69,7 +103,7 @@ View::section('content', '<<<EOT
                     <!-- small box -->
                     <div class="small-box bg-warning">
                         <div class="inner">
-                            <h3>44</h3>
+                            <h3>'. $jumlahBidang_studi . '</h3>
 
                             <p>Bidang Studi</p>
                         </div>
@@ -79,12 +113,13 @@ View::section('content', '<<<EOT
                         <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
+
                 <!-- ./col -->
                 <div class="col-lg-3 col-6">
                     <!-- small box -->
                     <div class="small-box bg-danger">
                         <div class="inner">
-                            <h3>65</h3>
+                            <h3>'. $jumlahKelas .'</h3>
 
                             <p>Kelas</p>
                         </div>
@@ -115,9 +150,9 @@ View::section('content', '<<<EOT
         </div><!-- /.container-fluid -->
     </section>
     <!-- /.content -->
-</div>
-<!-- /.content-wrapper -->
-');
+</div>';
+
+View::section('content', $content);
 // View::section('footer', 'This is the footer of the Home page');
 
 // Render the home view

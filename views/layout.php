@@ -54,7 +54,7 @@
             <!-- Right navbar links -->
             <ul class="navbar-nav ml-auto">
                 <!-- Navbar Search -->
-                <li class="nav-item">
+                <!-- <li class="nav-item">
                     <a class="nav-link" data-widget="navbar-search" href="#" role="button">
                         <i class="fas fa-search"></i>
                     </a>
@@ -73,13 +73,14 @@
                             </div>
                         </form>
                     </div>
-                </li>
+                </li> -->
                 <li class="nav-item">
                     <form method="POST" action="logout.php">
                         <button class="d-inline btn btn-secondary" name="logout">Logout</button>
                     </form>
                 </li>
             </ul>
+            
         </nav>
         <!-- /.navbar -->
 
@@ -166,11 +167,11 @@
                                         <p>Kelas</p>
                                     </a>
                                 </li>
-                                <li class="nav-item">
-                                    <a href="@yield('nav')wali_kelas/index.php" class="nav-link">
+                                <!-- <li class="nav-item"> -->
+                                    <!-- <a href="@yield('nav')wali_kelas/index.php" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Wali Kelas</p>
-                                    </a>
+                                    </a> -->
                                 </li>
                             </ul>
                         </li>

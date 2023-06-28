@@ -53,9 +53,9 @@ $content = '<!-- Content Wrapper. Contains page content -->
                                     <label for="tingkat_kelas">Tingkat Kelas:</label>
                                     <!-- <input type="text" class="form-control" id="tingkat_kelas" name="tingkat_kelas"> -->
                                     <select class="form-control" id="tingkat_kelas" name="tingkat_kelas">
-                                        <option value="7">Kelas 7</option>
-                                        <option value="8">Kelas 8</option>
-                                        <option value="9">Kelas 9</option>
+                                        <option value="Kelas 7">Kelas 7</option>
+                                        <option value="Kelas 8">Kelas 8</option>
+                                        <option value="Kelas 9">Kelas 9</option>
                                     </select>
                                 </div>
                                 <div class="form-group">

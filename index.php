@@ -4,6 +4,7 @@ require 'View.php';
 
 // Define sections
 View::section('title', 'Home');
+View::section('css', '');
 // View::section('header', 'This is the header of the Home page');
 View::section('content', '<<<EOT
 ');
