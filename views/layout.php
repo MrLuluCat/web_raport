@@ -43,12 +43,12 @@
                 <li class="nav-item">
                     <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
                 </li>
-                <li class="nav-item d-none d-sm-inline-block">
+                <!-- <li class="nav-item d-none d-sm-inline-block">
                     <a href="#" class="nav-link">Home</a>
                 </li>
                 <li class="nav-item d-none d-sm-inline-block">
                     <a href="#" class="nav-link">Contact</a>
-                </li>
+                </li> -->
             </ul>
 
             <!-- Right navbar links -->
@@ -80,14 +80,14 @@
                     </form>
                 </li>
             </ul>
-            
+
         </nav>
         <!-- /.navbar -->
 
         <!-- Main Sidebar Container -->
         <aside class="main-sidebar sidebar-light-primary elevation-4">
             <!-- Brand Logo -->
-            <a href="#" class="brand-link">
+            <a href="@yield('nav')dashboard.php" class="brand-link">
                 <img src="@yield('css')assets/img/logo2.png" alt="Logo" class="brand-image img-circle">
                 <span class="brand-text font-weight-light">e-Rapot Auliya</span>
             </a>
@@ -99,9 +99,29 @@
                     <!-- <div class="image">
             <img src="../assets/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
           </div> -->
+
                     <div class="info">
-                        <a href="#" class="d-block">Bilie</a>
+                        <a data-toggle="collapse" href="#collapseExample" aria-expanded="false" class="collapsed">
+                            <span>
+                                <h1 class="mb-2"> billie</h1>
+                                <div class="clearfix"></div>
+                                <span class="caret"></span>
+                                <span class="user-level">Administrator</span>
+                            </span>
+                        </a>
+                        <div class="clearfix"></div>
+
+                        <div class="in collapse" id="collapseExample">
+                            <ul class="nav">
+                                <li>
+                                    <a href="#" class="collapsed">
+                                        <span class="link-collapse">Ganti Passwowrd</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
+
                 </div>
 
                 <!-- SidebarSearch Form -->
@@ -156,9 +176,9 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="@yield('nav')bidang_studi/index.php" class="nav-link">
+                                    <a href="@yield('nav')mapel/index.php" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>Bidang Studi</p>
+                                        <p>Mata Pelajaran</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
@@ -168,60 +188,60 @@
                                     </a>
                                 </li>
                                 <!-- <li class="nav-item"> -->
-                                    <!-- <a href="@yield('nav')wali_kelas/index.php" class="nav-link">
+                                <!-- <a href="@yield('nav')wali_kelas/index.php" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Wali Kelas</p>
                                     </a> -->
-                                </li>
-                            </ul>
                         </li>
+                    </ul>
+                    </li>
 
-                        <!-- <li class="nav-item">
+                    <!-- <li class="nav-item">
                             <a href="#" class="nav-link">
                                 <i class="nav-icon fas fa-chalkboard-teacher"></i> -->
-                                <!-- <i class="nav-icon fas fa-th"></i> -->
-                                <!-- <p> -->
-                                    <!-- Wali Kelas -->
-                                    <!-- <span class="right badge badge-danger">New</span> -->
-                                <!-- </p> -->
-                            <!-- </a>
+                    <!-- <i class="nav-icon fas fa-th"></i> -->
+                    <!-- <p> -->
+                    <!-- Wali Kelas -->
+                    <!-- <span class="right badge badge-danger">New</span> -->
+                    <!-- </p> -->
+                    <!-- </a>
                         </li> -->
 
-                        <li class="nav-item ">
-                            <a href="#" class="nav-link">
-                                <i class="nav-icon far fa-file-alt"></i>
-                                <p>
-                                    Rapot
-                                    <i class="right fas fa-angle-left"></i>
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="../siswa/index.php" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Buat Rapot</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="../guru/index.php" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Grade</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="./index3.html" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Ketidakhadiran</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="./index3.html" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Catatan</p>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
+                    <li class="nav-item ">
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon far fa-file-alt"></i>
+                            <p>
+                                Rapot
+                                <i class="right fas fa-angle-left"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="../siswa/index.php" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Buat Rapot</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../guru/index.php" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Grade</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="./index3.html" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Ketidakhadiran</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="./index3.html" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Catatan</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
 
                     </ul>
                 </nav>
@@ -233,9 +253,30 @@
 
 
         <main>
-            @yield('content')
-        </main>
 
+            <!-- Content Wrapper. Contains page content -->
+            <div class="content-wrapper">
+                <!-- Content Header (Page header) -->
+                <div class="content-header">
+                    <div class="container-fluid">
+                        <div class="row mb-2">
+                            <div class="col-sm-6">
+                                <h1 class="m-0">@yield('contentTittle')</h1>
+                            </div><!-- /.col -->
+                            <div class="col-sm-6">
+                                <ol class="breadcrumb float-sm-right">
+                                    <li class="breadcrumb-item"><a href="@yield('contentRoot')">@yield('contentLink')</a></li>
+                                    <li class="breadcrumb-item active">@yield('contentLinkActive')</li>
+                                </ol>
+                            </div><!-- /.col -->
+                        </div><!-- /.row -->
+                    </div><!-- /.container-fluid -->
+                </div>
+                <!-- /.content-header -->
+
+                @yield('content')
+
+        </main>
 
         <footer class="main-footer">
             <strong>Copyright &copy; 2023 <a href="#">Web e-Raport Auliya</a>.</strong>

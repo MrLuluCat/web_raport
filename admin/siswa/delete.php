@@ -1,6 +1,6 @@
 <?php
 // Koneksi ke database
-require_once('../koneksi.php');
+require_once('../../koneksi.php');
 
 // Mendapatkan ID siswa dari URL
 $id_siswa = isset($_GET["id_siswa"]) ? $_GET["id_siswa"] : "";
@@ -40,7 +40,7 @@ function deleteSiswa($conn, $id_siswa)
             $row = mysqli_fetch_assoc($result);
             $username = $row['username'];
 
-            // Menghapus data pengguna berdasarkan username
+            // Menghapus data users berdasarkan username
             $queryDeleteUser = "DELETE FROM users WHERE username = '$username'";
             $resultDeleteUser = mysqli_query($conn, $queryDeleteUser);
 
@@ -69,7 +69,7 @@ if (isset($_POST['delete'])) {
     $delete = deleteSiswa($conn, $id_siswa);
 
     if ($delete) {
-        header("Location: logout.php");
+        header("Location: index.php");
         exit();
     } else {
         echo "Gagal menghapus siswa.";
@@ -103,7 +103,7 @@ if (isset($_POST['delete'])) {
                 <form action="<?php echo $_SERVER["PHP_SELF"] . "?id_siswa=$id_siswa"; ?>" method="POST">
                     <input type="hidden" name="id_siswa" value="<?php echo $id_siswa; ?>">
                     <button type="submit" name="delete" class="btn btn-danger">Delete</button>
-                    <a href="logout.php" class="btn btn-secondary">Cancel</a>
+                    <a href="index.php" class="btn btn-secondary">Cancel</a>
                 </form>
             </div>
         </div>

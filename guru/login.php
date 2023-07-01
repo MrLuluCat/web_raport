@@ -99,7 +99,7 @@ $conn->close();
         <div class="card-header text-center">
           <img src="../assets/img/logo.png" alt="logo">
           </br>
-          <a href="../../index2.html" class="h1"><b>Login</b> Guru</a>
+          <a href="../index.php" class="h1"><b>Login</b> Guru</a>
         </div>
         <div class="card-body">
           <p class="login-box-msg">Sign in to start your session</p>

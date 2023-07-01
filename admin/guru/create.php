@@ -54,33 +54,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     exit();
 }
 
-View::section('title', 'SMPIT Auliya');
+View::section('tittle', 'Guru');
+View::section('contentTittle', 'Guru');
+View::section('contentRoot', 'javascript:javascript:history.go(-1)');
+View::section('contentLink', 'Guru');
+View::section('contentLinkActive', 'Create');
+
 View::section('css', '../../');
 View::section('nav', '../');
 // View::section('header', 'This is the header of the Home page');
 
 $content = '
-<!-- Content Wrapper. Contains page content -->
-
-        <div class="content-wrapper">
-
-            <!-- Content Header (Page header) -->
-            <div class="content-header">
-                <div class="container-fluid">
-                    <div class="row mb-2">
-                        <div class="col-sm-6">
-                            <h1 class="m-0">Siswa</h1>
-                        </div><!-- /.col -->
-                        <div class="col-sm-6">
-                            <ol class="breadcrumb float-sm-right">
-                                <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                <li class="breadcrumb-item active">Dashboard</li>
-                            </ol>
-                        </div><!-- /.col -->
-                    </div><!-- /.row -->
-                </div><!-- /.container-fluid -->
-            </div>
-            <!-- /.content-header -->
 
             <section class="content">
                 <div class="my-3 p-3 bg-body rounded shadow-sm">

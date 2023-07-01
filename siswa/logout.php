@@ -13,6 +13,7 @@ if (isset($_POST['logout'])) {
     exit();
 }
 
-header('Location: index.php');
+session_start();
+session_unset();
 session_destroy();
 exit();

@@ -30,6 +30,13 @@ if ($result && mysqli_num_rows($result) == 1) {
     exit();
 }
 
+$gender = $jenis_kelamin; // Replace with your database retrieval logic
+
+// Define the options and their values
+$options = array(
+    "Laki-laki" => "Laki-laki",
+    "Perempuan" => "Perempuan"
+);
 // ...
 if (isset($_POST['submit'])) {
     $nama_siswa     = isset($_POST['nama_siswa']) ? $_POST['nama_siswa'] : "";
@@ -59,33 +66,19 @@ if (isset($_POST['submit'])) {
     }
 }
 
-View::section('title', 'SMPIT Auliya');
+
+View::section('tittle', 'Siswa');
+View::section('contentTittle', 'Siswa');
+View::section('contentRoot', 'javascript:javascript:history.go(-1)');
+View::section('contentLink', 'Siswa');
+View::section('contentLinkActive', 'Edit');
+
+
 View::section('css', '../../');
 View::section('nav', '../');
 // View::section('header', 'This is the header of the Home page');
 
 $content = '
-<!-- Content Wrapper. Contains page content -->
-
-        <div class="content-wrapper">
-
-            <!-- Content Header (Page header) -->
-            <div class="content-header">
-                <div class="container-fluid">
-                    <div class="row mb-2">
-                        <div class="col-sm-6">
-                            <h1 class="m-0">Siswa</h1>
-                        </div><!-- /.col -->
-                        <div class="col-sm-6">
-                            <ol class="breadcrumb float-sm-right">
-                                <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                <li class="breadcrumb-item active">Dashboard</li>
-                            </ol>
-                        </div><!-- /.col -->
-                    </div><!-- /.row -->
-                </div><!-- /.container-fluid -->
-            </div>
-            <!-- /.content-header -->
 
             <section class="content">
                 <div class="my-3 p-3 bg-body rounded shadow-sm">
@@ -101,8 +94,8 @@ $content = '
                     <div class="mb-3">
                         <label for="jenis_kelamin" class="form-label">Jenis Kelamin</label>
                         <select class="form-control" id="jenis_kelamin" name="jenis_kelamin" required>
-                            <option value="Laki-laki" ' . ($jenis_kelamin == "Laki-laki") . '"selected" >Laki-laki</option>
-                            <option value="Perempuan" ' . ($jenis_kelamin == "Perempuan") . '"selected" >Perempuan</option>
+                            <option value="Laki-laki" ' . ($jenis_kelamin === "Laki-laki" ? "selected" : "") . '>Laki-laki</option>
+                            <option value="Perempuan" ' . ($jenis_kelamin === "Perempuan" ? "selected" : "") . '>Perempuan</option>
                         </select>
                     </div>
                     <div class="mb-3">

@@ -1,9 +1,8 @@
 <?php
+// Koneksi ke database
 require_once('../../koneksi.php');
-require '../../view.php';
 
-
-if (isset($_SESSION['guru_username'])) {
+if (isset($_SESSION['siswa_username'])) {
     header("Location: index.php");
     exit();
 }
@@ -58,60 +57,63 @@ if (isset($_POST['submit'])) {
     }
 }
 
-View::section('tittle', 'Guru - Edit');
-View::section('contentTittle', 'Edit Guru');
-View::section('contentRoot', 'javascript:javascript:history.go(-1)');
-View::section('contentLink', 'Guru');
-View::section('contentLinkActive', 'Edit');
+// Tutup koneksi ke database
+$conn->close();
+?>
 
-View::section('css', '../../');
-View::section('nav', '../');
-// View::section('header', 'This is the header of the Home page');
 
-$content = '
 
-            <section class="content">
-                <div class="my-3 p-3 bg-body rounded shadow-sm">
-                <div class="card">
-                <div class="card-body">
-                <form action="" method="POST">
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit guru</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 offset-md-3 mt-5">
+                <h2>Edit guru</h2>
+                <form action="<?php echo $_SERVER["PHP_SELF"] . "?id_guru=$id_guru"; ?>" method="POST">
                     <input type="hidden" name="id_guru" value="<?php echo $id_guru; ?>">
 
                     <div class="mb-3">
                         <label for="nama_guru" class="form-label">Nama guru</label>
-                        <input type="text" class="form-control" id="nama_guru" name="nama_guru" value="' . $nama_guru . '" required>
+                        <input type="text" class="form-control" id="nama_guru" name="nama_guru" value="<?php echo $nama_guru; ?>" required>
                     </div>
                     <div class="mb-3">
                         <label for="jenis_kelamin" class="form-label">Jenis Kelamin</label>
-                        <select class="form-control" id="jenis_kelamin" name="jenis_kelamin" required>
-                            <option value="Laki-laki" ' . ($jenis_kelamin === "Laki-laki" ? "selected" : "") . '>Laki-laki</option>
-                            <option value="Perempuan" ' . ($jenis_kelamin === "Perempuan" ? "selected" : "") . '>Perempuan</option>
+                        <select class="form-select" id="jenis_kelamin" name="jenis_kelamin" required>
+                            <option value="Laki-laki" <?php if ($jenis_kelamin == "Laki-laki") echo "selected"; ?>>Laki-laki</option>
+                            <option value="Perempuan" <?php if ($jenis_kelamin == "Perempuan") echo "selected"; ?>>Perempuan</option>
                         </select>
                     </div>
                     <div class="mb-3">
                         <label for="tanggal_lahir" class="form-label">Tanggal Lahir</label>
-                        <input type="date" class="form-control" id="tanggal_lahir" name="tanggal_lahir" value="' . $tanggal_lahir . '" required>
+                        <input type="date" class="form-control" id="tanggal_lahir" name="tanggal_lahir" value="<?php echo $tanggal_lahir; ?>" required>
                     </div>
                     <div class="mb-3">
                         <label for="alamat" class="form-label">Alamat</label>
-                        <textarea class="form-control" id="alamat" name="alamat" rows="3" required>' . $alamat . '</textarea>
+                        <textarea class="form-control" id="alamat" name="alamat" rows="3" required><?php echo $alamat; ?></textarea>
                     </div>
                     <div class="mb-3">
                         <label for="nomor_telepon" class="form-label">Nomor Telepon</label>
-                        <input type="text" class="form-control" id="nomor_telepon" name="nomor_telepon" value="' . $nomor_telepon . '" required>
+                        <input type="text" class="form-control" id="nomor_telepon" name="nomor_telepon" value="<?php echo $nomor_telepon; ?>" required>
                     </div>
                     <div class="mb-3">
                         <label for="email" class="form-label">Email</label>
-                        <input type="email" class="form-control" id="email" name="email" value="' . $email . '" required>
+                        <input type="email" class="form-control" id="email" name="email" value="<?php echo $email; ?>" required>
                     </div>
                     <button type="submit" name="submit" class="btn btn-primary">Update guru</button>
                 </form>
-                        </div>
-                    </div>
-                </div>
-            </section>
-        </div>';
+            </div>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+</body>
 
-View::section('content', $content);
-// Render the home view
-View::extend('views/layout.php');
+</html>

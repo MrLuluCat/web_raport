@@ -32,44 +32,32 @@ $result = mysqli_query($conn,$sql);
 //     exit();
 // }
 
-View::section('title', 'SMPIT Auliya');
+View::section('title', 'Guru');
+View::section('contentTittle', 'Guru');
+View::section('contentRoot', '../dashboard.php');
+View::section('contentLink', 'Dashboard');
+View::section('contentLinkActive', 'Guru');
+
 View::section('css', '../../');
 View::section('nav', '../');
 
-$content = '<!-- Content Wrapper. Contains page content -->
-        <div class="content-wrapper">
-            <!-- Content Header (Page header) -->
-            <div class="content-header">
-                <div class="container-fluid">
-                    <div class="row mb-2">
-                        <div class="col-sm-6">
-                            <h1 class="m-0">Guru</h1>
-                        </div><!-- /.col -->
-                        <div class="col-sm-6">
-                            <ol class="breadcrumb float-sm-right">
-                                <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                <li class="breadcrumb-item active">Dashboard</li>
-                            </ol>
-                        </div><!-- /.col -->
-                    </div><!-- /.row -->
-                </div><!-- /.container-fluid -->
-            </div>
-            <!-- /.content-header -->
+$content = '
             <section class="content">
                     <div class="my-3 p-3 bg-body rounded shadow-sm">
+                        
                         <div class="pb-3">
-                        <a href="create.php" class="btn btn-success">+ Tambah Guru</a>
+                            <a href="create.php" class="btn btn-success">+ Tambah Guru</a>
                         </div>
 
                         <table id="" class="table table-striped table-bordered">
                         <thead>
                             <tr>
-                            <th class="col-md-1">No</th>
-                            <th class="col-md-2">NIP</th>
-                            <th class="col-md-3">Nama</th>
-                            <th class="col-sm-2">Jenis Kelamin</th>
-                            <th class="col-sm-2">Nomor</th>
-                            <th class="col-sm-2">Action</th>
+                                <th class="col-md-1">No</th>
+                                <th class="col-md-2">NIP</th>
+                                <th class="col-md-3">Nama</th>
+                                <th class="col-sm-2">Jenis Kelamin</th>
+                                <th class="col-sm-2">Nomor</th>
+                                <th class="col-sm-2">Action</th>
                             </tr>
                         </thead>
                         <tbody>';

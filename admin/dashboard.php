@@ -12,8 +12,8 @@ $resultGuru = mysqli_query($conn, $sqlGuru);
 $sqlKelas = "SELECT COUNT(*) AS id_kelas FROM kelas";
 $resultKelas = mysqli_query($conn, $sqlKelas);
 
-$sqlBidang_studi = "SELECT COUNT(*) AS id_bidang_studi FROM bidang_studi";
-$resultBidang_studi = mysqli_query($conn, $sqlBidang_studi);
+$sqlmapel = "SELECT COUNT(*) AS id_mapel FROM mapel";
+$resultmapel = mysqli_query($conn, $sqlmapel);
 
 if ($resultSiswa) {
     // Mengambil hasil sebagai array asosiatif
@@ -30,36 +30,34 @@ if ($resultKelas) {
     $row = mysqli_fetch_assoc($resultKelas);
     $jumlahKelas = $row["id_kelas"];
 }
-if ($resultBidang_studi) {
+if ($resultmapel) {
     // Mengambil hasil sebagai array asosiatif
-    $row = mysqli_fetch_assoc($resultBidang_studi);
-    $jumlahBidang_studi = $row["id_bidang_studi"];
+    $row = mysqli_fetch_assoc($resultmapel);
+    $jumlahmapel = $row["id_mapel"];
 }
 // Define sections
-View::section('title', 'Home');
+View::section('title', 'Dashboard');
+View::section('contentTittle', 'Dashboard');
+View::section('contentLink', '');
+View::section('contentLinkActive', 'Dashboard');
 View::section('css', '../');
 View::section('nav', '../admin/');
 // View::section('header', 'This is the header of the Home page');
 
-$content = '<!-- Content Wrapper. Contains page content -->
-<div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <div class="content-header">
-        <div class="container-fluid">
-            <div class="row mb-2">
-                <div class="col-sm-6">
-                    <h1 class="m-0">Dashboard</h1>
-                </div><!-- /.col -->
-                <div class="col-sm-6">
-                    <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">Dashboard</li>
-                    </ol>
-                </div><!-- /.col -->
-            </div><!-- /.row -->
-        </div><!-- /.container-fluid -->
-    </div>
-    <!-- /.content-header -->
+$content = '
+
+    <div class="jumbotron jumbotron-fluid">
+            <div class="container">
+                <h1 class="display-4">Selamat Datang di Website e-Rapot SMPIT Auliya</h1>
+                <p class="lead">
+                    Website ini membantu memantau Rapot Siswa dengan mudah.
+                </p>
+                <hr class="my-4">
+                <p>
+                    menyediakan solusi yang mudah dan efisien untuk memantau Rapot Siswa.
+                </p>
+            </div>
+        </div>
 
     <!-- Main content -->
     <section class="content">
@@ -78,7 +76,7 @@ $content = '<!-- Content Wrapper. Contains page content -->
                         <div class="icon">
                             <i class="fas fa-user-graduate"></i>
                         </div>
-                        <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                        <a href="siswa/index.php" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
                 
@@ -94,23 +92,23 @@ $content = '<!-- Content Wrapper. Contains page content -->
                         <div class="icon">
                             <i class="fas fa-chalkboard-teacher"></i>
                         </div>
-                        <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                        <a href="guru/index.php" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
 
                 <!-- ./col -->
                 <div class="col-lg-3 col-6">
                     <!-- small box -->
-                    <div class="small-box bg-warning">
+                    <div class="small-box bg-purple text-white">
                         <div class="inner">
-                            <h3>'. $jumlahBidang_studi . '</h3>
+                            <h3>'. $jumlahmapel . '</h3>
 
-                            <p>Bidang Studi</p>
+                            <p>Mata Pelajaran</p>
                         </div>
                         <div class="icon">
                             <i class="fas fa-book-open"></i>
                         </div>
-                        <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                        <a href="mapel/index.php" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
 
@@ -119,14 +117,14 @@ $content = '<!-- Content Wrapper. Contains page content -->
                     <!-- small box -->
                     <div class="small-box bg-danger">
                         <div class="inner">
-                            <h3>'. $jumlahKelas .'</h3>
+                            <h3>'. $jumlahKelas . '</h3>
 
                             <p>Kelas</p>
                         </div>
                         <div class="icon">
                             <i class="fas fa-school"></i>
                         </div>
-                        <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                        <a href="kelas/index.php" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
                 <!-- ./col -->
@@ -150,10 +148,11 @@ $content = '<!-- Content Wrapper. Contains page content -->
         </div><!-- /.container-fluid -->
     </section>
     <!-- /.content -->
-</div>';
+</div>
+
+';
 
 View::section('content', $content);
-// View::section('footer', 'This is the footer of the Home page');
 
 // Render the home view
 View::extend('views/layout.php');

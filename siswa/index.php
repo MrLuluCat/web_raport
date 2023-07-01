@@ -3,14 +3,14 @@ session_start();
 include '../koneksi.php';
 
 // Kode untuk memeriksa apakah pengguna sudah login sebelumnya
-if (!isset($_SESSION['siswa_username'])) {
+if (!isset($_SESSION['siswa'])) {
     header("Location: login.php");
     exit();
 }
 
-$username = $_SESSION['siswa_username'];
+$username = $_SESSION['siswa'];
 
-$query = "SELECT * FROM siswa";
+$query = "SELECT * FROM siswa WHERE NISN=$username";
 $result = mysqli_query($conn, $query);
 
 $row = mysqli_fetch_assoc($result);
@@ -24,79 +24,167 @@ $email          = $row["email"];
 
 ?>
 
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>WEB Rapot</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Siswa</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <!-- FontAwesome CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+    <link rel="stylesheet" href="../assets/dist/css/adminlte.min.css">
+
+    <!-- Custom CSS -->
+    <style>
+        .navbar {
+            background-color: #343a40;
+        }
+
+        .navbar-brand,
+        .navbar-nav .nav-link {
+            color: #fff;
+        }
+
+        .card {
+            border: none;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .card-title {
+            margin-bottom: 0.5rem;
+        }
+
+        .card-text {
+            margin-bottom: 1rem;
+        }
+
+        .jumbotron {
+            background-color: #f8f9fa;
+            padding: 40px;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .jumbotron h1 {
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+
+        .jumbotron p {
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+
+        .jumbotron .btn-primary {
+            padding: 10px 30px;
+            font-size: 20px;
+        }
+    </style>
 </head>
 
 <body>
-    <main>
-        <div class="w-auto ms-5 mt-5">
-            <div class="col-lg-9">
-                <div class="card h-auto">
-                    <div class="card-header">
-                        <h3 class="card-title">Selamat Datang, <?php echo $nama_siswa ?></h3>
-                    </div>
-                    <div class="card-body h-auto">
-                        <div class="flex-row d-flex">
-                            <img src="../assets/img/logo.png" alt="logo" style="width: 203px; height: 249px" />
 
-                            <div class="ms-5">
-                                <div class="d-flex flex-row">
-                                    <div>
-                                        <p class="fs-4">Nama</p>
-                                        <p class="fs-4">NISN</p>
-                                        <p class="fs-4">Jenis Kelamin</p>
-                                        <p class="fs-4">Tanggal Lahir</p>
-                                        <p class="fs-4">Nomor Telepon</p>
-                                        <p class="fs-4">Alamat</p>
-                                        <p class="fs-4">Email</p>
-                                    </div>
-                                    <div class="ms-5">
-                                        <p class="fs-4">:</p>
-                                        <p class="fs-4">:</p>
-                                        <p class="fs-4">:</p>
-                                        <p class="fs-4">:</p>
-                                        <p class="fs-4">:</p>
-                                        <p class="fs-4">:</p>
-                                        <p class="fs-4">:</p>
-                                    </div>
-                                    <div class="ms-5">
-                                        <p class="fs-4"><?= $nama_siswa ?></p>
-                                        <p class="fs-4"><?= $NISN ?></p>
-                                        <p class="fs-4"><?= $jenis_kelamin ?></p>
-                                        <p class="fs-4"><?= $tanggal_lahir ?></p>
-                                        <p class="fs-4"><?= $nomor_telepon ?></p>
-                                        <p class="fs-4"><?= $alamat ?></p>
-                                        <p class="fs-4"><?= $email ?></p>
-                                    </div>
-                                </div>
-                            </div>
+    <!-- Preloader -->
+    <div class="preloader flex-column justify-content-center align-items-center">
+        <img class="animation__shake" src="../assets/img/logo2.png" alt="logo" height="80" width="80">
+    </div>
+
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#">Dashboard Siswa, <?= $nama_siswa  ?></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.php">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="profile.php">Profile</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-4">
+        <div class="jumbotron">
+            <h1 class="display-4">Selamat Datang di e-Raport SMPIT Auliya</h1>
+            <p class="lead">Ini adalah halaman dashboard untuk melihat rapot dan informasi lainnya.</p>
+            <hr class="my-4">
+            <p>Selamat belajar dan semoga sukses!</p>
+            <p>Jadilah Anak Yang Pnitar, Kreatif, Soleh</p>
+            <!-- <a class="btn btn-primary btn-lg" href="#" role="button">Mulai Sekarang</a> -->
+        </div>
+
+        <div class="container mt-4">
+            <h2 class="text-center mb-4">Rapot</h2>
+
+            <div class="row" id="rapotContainer">
+                <div class="col-md-4">
+                    <div class="card" data-kelas="Kelas 1" data-semester="Semester 1">
+                        <div class="card-body text-center">
+                            <i class="fas fa-book card-icon"></i>
+                            <h5 class="card-title">Semester 1</h5>
+                            <p class="card-text">Tahun Ajaran 2023/2024</p>
+                            <button onclick="redirectToRapot('Kelas 1', 'Semester 1')" class="btn btn-primary mt-3">Lihat Nilai</button>
+                            <button onclick="redirectToRapot('Kelas 1', 'Semester 1')" class="btn btn-success mt-3">Lihat Rapot</button>
                         </div>
                     </div>
                 </div>
-
-                <div class="card mt-5 w-25">
-                    <div class="card-header">
-                        <h3 class="card-title">Lihat Rapot</h3>
-                    </div>
-                    <div class="card-body">
-                        <a href="#" class="btn btn-primary">Lihat Raport</a>
-                        <form class="d-inline" action="logout.php" method="post">
-                            <button name="logout" id="logout" class="btn btn-danger d-inline">Logout</button>
-                        </form>
+                <!-- <div class="col-md-4">
+                <div class="card" data-kelas="Kelas 2" data-semester="Semester 2">
+                    <div class="card-body text-center">
+                        <i class="fas fa-book card-icon"></i>
+                        <h5 class="card-title">Semester 2</h5>
+                        <p class="card-text">Tahun Ajaran 2023/2024</p>
+                        <button onclick="redirectToRapot('Kelas 2', 'Semester 2')" class="btn btn-primary mt-3">Lihat Rapot</button>
                     </div>
                 </div>
+            </div> -->
+                <!-- Tambahkan card lain untuk rapot lainnya -->
             </div>
         </div>
-    </main>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+        <!-- Bootstrap JavaScript -->
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+        <script>
+            function redirectToRapot(kelas, semester) {
+                // Lakukan filtering atau aksi lainnya berdasarkan kelas dan semester yang dipilih
+                console.log("Kelas: " + kelas + ", Semester: " + semester);
+
+                // Simulasi pengalihan ke halaman rapot
+                window.location.href = "rapot.php"; // Ganti dengan halaman yang sesuai
+
+                // Atau Anda dapat mengirim parameter kelas dan semester ke halaman rapot
+                // window.location.href = "rapot.html?kelas=" + kelas + "&semester=" + semester;
+            }
+        </script>
+
+        <!-- AdminLTE App -->
+        <script src="../assets/dist/js/adminlte.js"></script>
 </body>
 
 </html>

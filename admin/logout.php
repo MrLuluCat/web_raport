@@ -1,18 +1,16 @@
 <?php
-// if (isset($_POST['logout'])) {
-//     // Lakukan tindakan logout di sini
+if (isset($_POST['logout'])) {
+    // Lakukan tindakan logout di sini
 
-//     // Hapus data sesi
-//     session_start();
-//     session_unset();
-//     session_destroy();
+    // Hapus data sesi
+    session_start();
+    session_unset();
+    session_destroy();
 
-//     // Alihkan pengguna ke halaman login
-//     header('Location: login.php');
-//     exit();
-// }
+    // Alihkan pengguna ke halaman login
+    header('Location: login.php');
+    exit();
+}
 
-session_unset();
-session_destroy();
 header('Location: login.php');
 exit();

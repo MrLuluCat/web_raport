@@ -37,29 +37,17 @@ $conn->close();
 
 
 // Define sections
-View::section('title', 'SMPIT Auliya');
+View::section('title', 'Siswa');
+View::section('contentTittle', 'Siswa');
+View::section('contentRoot', '../dashboard.php');
+View::section('contentLink', 'Dashboard');
+View::section('contentLinkActive', 'Siswa');
+
 View::section('css', '../../');
 View::section('nav', '../');
 
-$content = '<!-- Content Wrapper. Contains page content -->
-        <div class="content-wrapper">
-            <!-- Content Header (Page header) -->
-            <div class="content-header">
-                <div class="container-fluid">
-                    <div class="row mb-2">
-                        <div class="col-sm-6">
-                            <h1 class="m-0">Siswa</h1>
-                        </div><!-- /.col -->
-                        <div class="col-sm-6">
-                            <ol class="breadcrumb float-sm-right">
-                                <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                <li class="breadcrumb-item active">Dashboard</li>
-                            </ol>
-                        </div><!-- /.col -->
-                    </div><!-- /.row -->
-                </div><!-- /.container-fluid -->
-            </div>
-            <!-- /.content-header -->
+$content = '
+
             <section class="content">
                     <div class="my-3 p-3 bg-body rounded shadow-sm">
                         <div class="pb-3">
