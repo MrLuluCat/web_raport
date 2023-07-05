@@ -38,72 +38,18 @@ $email          = $row["email"];
     <!-- FontAwesome CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 
-    <link rel="stylesheet" href="../assets/dist/css/adminlte.min.css">
+    <!-- <link rel="stylesheet" href="../assets/dist/css/adminlte.min.css"> -->
 
     <!-- Custom CSS -->
-    <style>
-        .navbar {
-            background-color: #343a40;
-        }
-
-        .navbar-brand,
-        .navbar-nav .nav-link {
-            color: #fff;
-        }
-
-        .card {
-            border: none;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s;
-        }
-
-        .card:hover {
-            transform: translateY(-5px);
-        }
-
-        .card-icon {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-        }
-
-        .card-title {
-            margin-bottom: 0.5rem;
-        }
-
-        .card-text {
-            margin-bottom: 1rem;
-        }
-
-        .jumbotron {
-            background-color: #f8f9fa;
-            padding: 40px;
-            margin-bottom: 40px;
-            text-align: center;
-        }
-
-        .jumbotron h1 {
-            font-size: 36px;
-            margin-bottom: 20px;
-        }
-
-        .jumbotron p {
-            font-size: 18px;
-            margin-bottom: 20px;
-        }
-
-        .jumbotron .btn-primary {
-            padding: 10px 30px;
-            font-size: 20px;
-        }
-    </style>
+    <link rel="stylesheet" href="../style.css">
 </head>
 
 <body>
 
-    <!-- Preloader -->
-    <div class="preloader flex-column justify-content-center align-items-center">
-        <img class="animation__shake" src="../assets/img/logo2.png" alt="logo" height="80" width="80">
-    </div>
+    <!-- Preloader
+    <div class="preloader">
+        <div class="spinner"></div>
+    </div> -->
 
     <nav class="navbar navbar-expand-lg navbar-dark">
         <div class="container">
@@ -120,22 +66,29 @@ $email          = $row["email"];
                         <a class="nav-link" href="profile.php">Profile</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Logout</a>
+                        <form class="nav-link" method="POST" action="logout.php">
+                            <button class="btn btn-danger btn-sm" name="logout">
+                                <i class="fas fa-sign-out-alt mr-1"></i> Logout
+                            </button>
+                        </form>
                     </li>
                 </ul>
             </div>
+
         </div>
     </nav>
 
-    <div class="container mt-4">
-        <div class="jumbotron">
+    <div class="jumbotron jumbotron-fluid">
+        <div class="container">
             <h1 class="display-4">Selamat Datang di e-Raport SMPIT Auliya</h1>
             <p class="lead">Ini adalah halaman dashboard untuk melihat rapot dan informasi lainnya.</p>
             <hr class="my-4">
             <p>Selamat belajar dan semoga sukses!</p>
-            <p>Jadilah Anak Yang Pnitar, Kreatif, Soleh</p>
-            <!-- <a class="btn btn-primary btn-lg" href="#" role="button">Mulai Sekarang</a> -->
+            <p>Jadilah Yang PINTAR, KREATIF, SOLEH</p>
         </div>
+    </div>
+
+    <div class="container mt-4">
 
         <div class="container mt-4">
             <h2 class="text-center mb-4">Rapot</h2>
@@ -165,26 +118,26 @@ $email          = $row["email"];
                 <!-- Tambahkan card lain untuk rapot lainnya -->
             </div>
         </div>
+    </div>
 
-        <!-- Bootstrap JavaScript -->
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- Bootstrap JavaScript -->
+    <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-        <script>
-            function redirectToRapot(kelas, semester) {
-                // Lakukan filtering atau aksi lainnya berdasarkan kelas dan semester yang dipilih
-                console.log("Kelas: " + kelas + ", Semester: " + semester);
+    <script>
+        function redirectToRapot(kelas, semester) {
+            // Lakukan filtering atau aksi lainnya berdasarkan kelas dan semester yang dipilih
+            console.log("Kelas: " + kelas + ", Semester: " + semester);
 
-                // Simulasi pengalihan ke halaman rapot
-                window.location.href = "rapot.php"; // Ganti dengan halaman yang sesuai
+            // Simulasi pengalihan ke halaman rapot
+            window.location.href = "rapot.php"; // Ganti dengan halaman yang sesuai
 
-                // Atau Anda dapat mengirim parameter kelas dan semester ke halaman rapot
-                // window.location.href = "rapot.html?kelas=" + kelas + "&semester=" + semester;
-            }
-        </script>
-
-        <!-- AdminLTE App -->
-        <script src="../assets/dist/js/adminlte.js"></script>
+            // Atau Anda dapat mengirim parameter kelas dan semester ke halaman rapot
+            // window.location.href = "rapot.html?kelas=" + kelas + "&semester=" + semester;
+        }
+    </script>
+    
 </body>
 
 </html>

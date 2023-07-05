@@ -15,6 +15,9 @@ $resultKelas = mysqli_query($conn, $sqlKelas);
 $sqlmapel = "SELECT COUNT(*) AS id_mapel FROM mapel";
 $resultmapel = mysqli_query($conn, $sqlmapel);
 
+$sqlRapot = "SELECT COUNT(*) AS id_rapot FROM rapot";
+$resultRapot = mysqli_query($conn, $sqlRapot);
+
 if ($resultSiswa) {
     // Mengambil hasil sebagai array asosiatif
     $row = mysqli_fetch_assoc($resultSiswa);
@@ -34,6 +37,12 @@ if ($resultmapel) {
     // Mengambil hasil sebagai array asosiatif
     $row = mysqli_fetch_assoc($resultmapel);
     $jumlahmapel = $row["id_mapel"];
+}
+
+if ($resultRapot) {
+    // Mengambil hasil sebagai array asosiatif
+    $row = mysqli_fetch_assoc($resultRapot);
+    $jumlahRapot = $row["id_rapot"];
 }
 // Define sections
 View::section('title', 'Dashboard');
@@ -62,6 +71,7 @@ $content = '
     <!-- Main content -->
     <section class="content">
         <div class="container-fluid">
+        
             <!-- Small boxes (Stat box) -->
             <div class="row">
                 <div class="col-lg-3 col-6">
@@ -125,6 +135,23 @@ $content = '
                             <i class="fas fa-school"></i>
                         </div>
                         <a href="kelas/index.php" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                    </div>
+                </div>
+                <!-- ./col -->
+                
+                <!-- ./col -->
+                <div class="col-lg-6 col-6">
+                    <!-- small box -->
+                    <div class="small-box bg-primary">
+                        <div class="inner">
+                            <h3>'. $jumlahRapot . '</h3>
+
+                            <p>Rapot</p>
+                        </div>
+                        <div class="icon">
+                            <i class="nav-icon far fa-file-alt"></i>
+                        </div>
+                        <a href="rapot/index.php" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
                 <!-- ./col -->

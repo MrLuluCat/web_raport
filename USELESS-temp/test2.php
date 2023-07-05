@@ -49,11 +49,7 @@ mysqli_close($conn);
     <div class="form-1-container section-container">
         <div class="container">
             <div class="row">
-                <div class="col form-1 section-description wow fadeIn">
-                    <h2>Form 1</h2>
-                    <div class="divider-1 wow fadeInUp"><span></span></div>
-                    <p>A form with 2 "fieldset"-s and 2 "legend"-s: "User's credentials" and "User's preferences".</p>
-                </div>
+                
             </div>
             <div class="row">
                 <div class="col-md-10 offset-md-1 form-1-box wow fadeInUp">
@@ -72,26 +68,29 @@ mysqli_close($conn);
                         <!-- User's Preferences  -->
                         <fieldset class="form-group border p-3">
                             <legend class="w-auto px-2">Input Nilai</legend>
-                            <?php
-                            // Loop untuk menghasilkan form berdasarkan jumlah data dari tabel "mapel"
-                            while ($row = mysqli_fetch_assoc($result)) {
-                                $id_mapel = $row['id_mapel'];
-                                $nama_mapel = $row['nama_mapel'];
-                            ?>
-
-                                <fieldset class="form-group border p-3">
-                                    <legend class="w-auto px-2"><?php echo $nama_mapel; ?></legend>
-                                    <input type="hidden" name="id_mapel[]" value="<?php echo $id_mapel; ?>">
-                                    <div class="form-group">
-                                        <label for="nilai_rapot_<?php echo $id_mapel; ?>">Nilai Rapot:</label>
-                                        <input class="form-control" type="number" id="nilai_rapot_<?php echo $id_mapel; ?>" name="nilai_rapot[]" required>
+                            <div class="row">
+                                <?php
+                                // Loop untuk menghasilkan form berdasarkan jumlah data dari tabel "mapel"
+                                while ($row = mysqli_fetch_assoc($result)) {
+                                    $id_mapel = $row['id_mapel'];
+                                    $nama_mapel = $row['nama_mapel'];
+                                ?>
+                                    <div class="col-md-4">
+                                        <fieldset class="form-group border p-3">
+                                            <legend class="w-auto px-2"><?php echo $nama_mapel; ?></legend>
+                                            <input type="hidden" name="id_mapel[]" value="<?php echo $id_mapel; ?>">
+                                            <div class="form-group">
+                                                <label for="nilai_rapot_<?php echo $id_mapel; ?>">Nilai Rapot:</label>
+                                                <input class="form-control" type="number" id="nilai_rapot_<?php echo $id_mapel; ?>" name="nilai_rapot[]" required>
+                                            </div>
+                                        </fieldset>
                                     </div>
-                                </fieldset>
-                            <?php
-                            }
-
-                            ?>
+                                <?php
+                                }
+                                ?>
+                            </div>
                         </fieldset>
+
                         <!-- Submit Button  -->
                         <div class="form-group row text-right">
                             <div class="col">

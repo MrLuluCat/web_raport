@@ -6,10 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Web e-Rapot @yield('title')</title>
 
+    <!-- Bootstrap 4 CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Ionicons -->
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <!-- AdminLTE CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/admin-lte/3.1.0/css/adminlte.min.css">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="@yield('css')assets/plugins/fontawesome-free/css/all.min.css">
     <!-- Tempusdominus Bootstrap 4 -->
@@ -24,10 +28,8 @@
     <link rel="stylesheet" href="@yield('css')assets/plugins/daterangepicker/daterangepicker.css">
     <!-- summernote -->
     <link rel="stylesheet" href="@yield('css')assets/plugins/summernote/summernote-bs4.min.css">
-    <!-- Theme style -->
-    <link rel="stylesheet" href="@yield('css')assets/dist/css/adminlte.min.css">
-
-    <!-- <link rel="stylesheet" href="../style.css"> -->
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../style.css">
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -39,52 +41,24 @@
         </div>
 
         <!-- Navbar -->
-        <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+        <nav class="main-header navbar navbar-expand navbar-white navbar-light" style="position: fixed; width: 100%; z-index: 100;">
             <!-- Left navbar links -->
             <ul class="navbar-nav">
                 <li class="nav-item">
                     <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
                 </li>
-                <!-- <li class="nav-item d-none d-sm-inline-block">
-                    <a href="#" class="nav-link">Home</a>
-                </li>
-                <li class="nav-item d-none d-sm-inline-block">
-                    <a href="#" class="nav-link">Contact</a>
-                </li> -->
             </ul>
 
             <!-- Right navbar links -->
             <ul class="navbar-nav ml-auto">
-                <!-- Navbar Search -->
-                <!-- <li class="nav-item">
-                    <a class="nav-link" data-widget="navbar-search" href="#" role="button">
-                        <i class="fas fa-search"></i>
-                    </a>
-                    <div class="navbar-search-block">
-                        <form class="form-inline">
-                            <div class="input-group input-group-sm">
-                                <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
-                                <div class="input-group-append">
-                                    <button class="btn btn-navbar" type="submit">
-                                        <i class="fas fa-search"></i>
-                                    </button>
-                                    <button class="btn btn-navbar" type="button" data-widget="navbar-search">
-                                        <i class="fas fa-times"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </li> -->
                 <li class="nav-item">
                     <form method="POST" action="logout.php">
                         <button class="d-inline btn btn-secondary" name="logout">Logout</button>
                     </form>
                 </li>
             </ul>
-
         </nav>
-        <!-- /.navbar -->
+
 
         <!-- Main Sidebar Container -->
         <aside class="main-sidebar sidebar-light-primary elevation-4">
@@ -98,9 +72,7 @@
             <div class="sidebar">
                 <!-- Sidebar user panel (optional) -->
                 <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-                    <!-- <div class="image">
-            <img src="../assets/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
-          </div> -->
+
 
                     <div class="info">
                         <a data-toggle="collapse" href="#collapseExample" aria-expanded="false" class="collapsed">
@@ -147,8 +119,7 @@
                         <li class="nav-item">
                             <a href="@yield('nav')dashboard.php" class="nav-link">
                                 <i class="nav-icon fas fa-tachometer-alt"></i>
-                                <!-- <i class="nav-icon fas fa-columns"></i> -->
-                                <!-- <i class="nav-icon fas fa-th"></i> -->
+
                                 <p>
                                     Dashboard
                                     <!-- <span class="right badge badge-danger">New</span> -->
@@ -189,43 +160,18 @@
                                         <p>Kelas</p>
                                     </a>
                                 </li>
-                                <!-- <li class="nav-item"> -->
-                                <!-- <a href="@yield('nav')wali_kelas/index.php" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Wali Kelas</p>
-                                    </a> -->
+
                         </li>
                     </ul>
                     </li>
 
-                    <!-- <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="nav-icon fas fa-chalkboard-teacher"></i> -->
-                    <!-- <i class="nav-icon fas fa-th"></i> -->
-                    <!-- <p> -->
-                    <!-- Wali Kelas -->
-                    <!-- <span class="right badge badge-danger">New</span> -->
-                    <!-- </p> -->
-                    <!-- </a>
-                        </li> -->
 
-                    <li class="nav-item">
-                        <a href="@yield('nav')rapot/index.php" class="nav-link">
-                            <i class="nav-icon far fa-file-alt"></i>
-                            <!-- <i class="nav-icon fas fa-columns"></i> -->
-                            <!-- <i class="nav-icon fas fa-th"></i> -->
-                            <p>
-                                Rapot
-                                <!-- <span class="right badge badge-danger">New</span> -->
-                            </p>
-                        </a>
-                    </li>
 
-                    <!-- <li class="nav-item ">
+                    <li class="nav-item ">
                         <a href="#" class="nav-link">
                             <i class="nav-icon far fa-file-alt"></i>
                             <p>
-                                Rapot###
+                                Rapot
                                 <i class="right fas fa-angle-left"></i>
                             </p>
                         </a>
@@ -255,7 +201,7 @@
                                 </a>
                             </li>
                         </ul>
-                    </li> -->
+                    </li>
 
                     </ul>
                 </nav>
@@ -265,9 +211,7 @@
             <!-- /.sidebar -->
         </aside>
 
-
         <main>
-
             <!-- Content Wrapper. Contains page content -->
             <div class="content-wrapper">
                 <!-- Content Header (Page header) -->
@@ -276,64 +220,51 @@
                         <div class="row mb-2">
                             <div class="col-sm-6">
                                 <h1 class="m-0">@yield('contentTittle')</h1>
-                            </div><!-- /.col -->
+                            </div>
                             <div class="col-sm-6">
                                 <ol class="breadcrumb float-sm-right">
                                     <li class="breadcrumb-item"><a href="@yield('contentRoot')">@yield('contentLink')</a></li>
                                     <li class="breadcrumb-item active">@yield('contentLinkActive')</li>
                                 </ol>
-                            </div><!-- /.col -->
-                        </div><!-- /.row -->
-                    </div><!-- /.container-fluid -->
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <!-- /.content-header -->
 
-                @yield('content')
-
-        </main>
-
-        <footer class="main-footer">
-            <strong>Copyright &copy; 2023 <a href="#">Web e-Raport Auliya</a>.</strong>
-            All rights reserved.
-            <div class="float-right d-none d-sm-inline-block">
-                <b>2111500209 - </b> Nabil Abdul Salam F
+                <!-- Main content -->
+                <div class="content">
+                    <div class="container-fluid">
+                        @yield('content1')
+                        @yield('content2')
+                        @yield('content3')
+                        @yield('content4')
+                        @yield('content5')
+                        @yield('content')
+                    </div>
+                </div>
+                <!-- /.content -->
             </div>
-        </footer>
+            <!-- /.content-wrapper -->
 
-        <!-- /.control-sidebar -->
+            <!-- Main Footer -->
+            <footer class="main-footer">
+                <strong>Web e-Raport Auliya &copy; 2023</strong>
+                All rights reserved.
+                <div class="float-right d-none d-sm-inline-block">
+                    <b>2111500209 - </b> Nabil Abdul Salam F
+                </div>
+            </footer>
+        </main>
     </div>
     <!-- ./wrapper -->
 
     <!-- jQuery -->
-    <script src="@yield('css')assets/plugins/jquery/jquery.min.js"></script>
-    <!-- jQuery UI 1.11.4 -->
-    <script src="@yield('css')assets/plugins/jquery-ui/jquery-ui.min.js"></script>
-    <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
-    <script>
-        $.widget.bridge('uibutton', $.ui.button)
-    </script>
-    <!-- Bootstrap 4 -->
-    <script src="@yield('css')assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <!-- ChartJS -->
-    <script src="@yield('css')assets/plugins/chart.js/Chart.min.js"></script>
-    <!-- Sparkline -->
-    <script src="@yield('css')assets/plugins/sparklines/sparkline.js"></script>
-    <!-- JQVMap -->
-    <script src="@yield('css')assets/plugins/jqvmap/jquery.vmap.min.js"></script>
-    <script src="@yield('css')assets/plugins/jqvmap/maps/jquery.vmap.usa.js"></script>
-    <!-- jQuery Knob Chart -->
-    <script src="@yield('css')assets/plugins/jquery-knob/jquery.knob.min.js"></script>
-    <!-- daterangepicker -->
-    <script src="@yield('css')assets/plugins/moment/moment.min.js"></script>
-    <script src="@yield('css')assets/plugins/daterangepicker/daterangepicker.js"></script>
-    <!-- Tempusdominus Bootstrap 4 -->
-    <script src="@yield('css')assets/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
-    <!-- Summernote -->
-    <script src="@yield('css')assets/plugins/summernote/summernote-bs4.min.js"></script>
-    <!-- overlayScrollbars -->
-    <script src="@yield('css')assets/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
-    <!-- AdminLTE App -->
-    <script src="@yield('css')assets/dist/js/adminlte.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <!-- Bootstrap 4 JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js"></script>
+    <!-- AdminLTE JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/admin-lte/3.1.0/js/adminlte.min.js"></script>
 
     <script>
         // Function to set description value based on selected value
@@ -382,7 +313,6 @@
             setDescriptionValue(selectedValue, deskripsiKepribadianInput);
         });
     </script>
-
 </body>
 
 </html>

@@ -18,14 +18,14 @@
             <thead>
                 <tr>
                     <th class="col-sm-1 text-center align-middle" rowspan="2">No.</th>
-                    <th class="col-sm-2 text-center align-middle" rowspan="2">Mata Pelajaran</th>
+                    <th class="col-md-2 text-center align-middle" rowspan="2">Mata Pelajaran</th>
                     <th class="col-sm-1 text-center align-middle" rowspan="2">KKM</th>
-                    <th class="col-sm-2 text-center align-middle" colspan="2">Nilai</th>
+                    <th class="col-md-2 text-center align-middle" colspan="2">Nilai</th>
                     <th class="col-sm-2 text-center align-middle" rowspan="2">Deskripsi Kemajuan Belajar</th>
                 </tr>
                 <tr>
-                    <th class="col-sm-1 text-center">Angka</th>
-                    <th class="col-sm-2 text-center">Huruf</th>
+                    <th class="text-center">Angka</th>
+                    <th class="text-center">Huruf</th>
                 </tr>
             </thead>
             <tbody>
@@ -35,7 +35,7 @@
                     <td>75</td>
                     <td>85</td>
                     <td>Delapan Puluh Lima</td>
-                    <td>Baik</td>
+                    <td>Tuntas</td>
                 </tr>
                 <tr>
                     <td>2</td>
@@ -43,7 +43,7 @@
                     <td>70</td>
                     <td>80</td>
                     <td>Delapan Puluh Lima</td>
-                    <td>Cukup</td>
+                    <td>Tuntas</td>
                 </tr>
                 <tr>
                     <td>3</td>
@@ -51,7 +51,7 @@
                     <td>80</td>
                     <td>90</td>
                     <td>Delapan Puluh Lima</td>
-                    <td>Sangat Baik</td>
+                    <td>Tuntas</td>
                 </tr>
             </tbody>
         </table>

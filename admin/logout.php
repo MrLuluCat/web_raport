@@ -12,5 +12,5 @@ if (isset($_POST['logout'])) {
     exit();
 }
 
-header('Location: login.php');
+header('Location: index.php');
 exit();
