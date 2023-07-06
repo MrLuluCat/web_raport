@@ -67,17 +67,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Mendapatkan ID Ketidakhadiran yang baru saja di-generate
     $id_ketidakhadiran = mysqli_insert_id($conn);
 
-    // // Query INSERT untuk tabel Catatan
-    // $query_catatan = "INSERT INTO Catatan (id_siswa, catatan_wali_kelas, harapan_wali_murid)
-    //                   VALUES ('$id_siswa', '$catatan_wali_kelas', '$harapan_wali_murid')";
-    // // Lakukan eksekusi query INSERT untuk tabel Catatan
-    // $result_catatan = mysqli_query($conn, $query_catatan);
-
     // Mendapatkan ID Catatan yang baru saja di-generate
     $id_catatan = mysqli_insert_id($conn);
 
     // Query INSERT untuk tabel Rapot
-    $query_rapot = "INSERT INTO Rapot (id_siswa, id_guru, id_kelas, semester, tahun_pelajaran, tempat_terbit, tanggal_terbit, id_kegiatan, id_ak, id_ketidakhadiran, catatan_wali_kelas, harapan_wali_murid)
+    $query_rapot = "INSERT INTO Rapot (id_siswa, id_guru, id_kelas, semester, tahun_pelajaran, 
+    tempat_terbit, tanggal_terbit, id_kegiatan, id_ak, id_ketidakhadiran, catatan_wali_kelas, harapan_wali_murid)
                    VALUES ('$id_siswa', '$id_guru', '$id_kelas', '$semester', '$tahun_pelajaran', '$tempat_terbit', '$tanggal_terbit', '$id_kegiatan', '$id_ak', '$id_ketidakhadiran', '$catatan_wali_kelas', '$harapan_wali_murid')";
 
     // Lakukan eksekusi query INSERT
